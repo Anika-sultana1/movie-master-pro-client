@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from '../HeroSections/HeroSection';
 import Banner from '../Banner/Banner';
 import StatsSection from '../StatesSection/StateSection';
+import TopRatedMovies from '../TopRatedMovie/TopRatedMovies';
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <Banner></Banner>
             <HeroSection></HeroSection>
             <StatsSection></StatsSection>
+            <TopRatedMovies></TopRatedMovies>
         </div>
     );
 };
