@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+      --primary-color: #e50916;
+    --primarydark-color: #b81d24;
+    --black-color: #221f1f;
+    --dark-color: #161616;
+    --secondary-color: #cecfd1;
+    --grey-color: #f5f5f1;
+    --white-color: #ffffff;
+    --body-fonts: 'Roboto', sans-serif;
+    --title-fonts: 'Jost', sans-serif;
+
+}
+
+.descri-style{
+  font-family: var(--body-fonts);
+  color:var(--grey-color)
+}
+.heading{
+  color: var(--white-color);
+  font-family: var(--title-fonts);
+}
+
+
+.btn-primary{
+   background-color: var(--primary-color);
+   color: var(--white-color);
+   padding: 10px 5px;
+   border-radius: 5px;
+}
+
+.menu a.active{
+   border: 2px solid red;
+   border-radius: 5px;
+    color: red;
+}
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.bg-image{
+  background-image: url(./assets/body-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
