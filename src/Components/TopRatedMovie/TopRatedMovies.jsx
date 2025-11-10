@@ -14,7 +14,7 @@ const TopRatedMovies = () => {
     axios.get('/movies/top-rated')
       .then(res => setMovies(res.data))
       .catch(err => console.error(err));
-  }, []);
+  }, [axios]);
 
   return (
     <div className="p-4 bg-gray-100">

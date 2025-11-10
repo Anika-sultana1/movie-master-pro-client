@@ -4,6 +4,8 @@ import Banner from '../Banner/Banner';
 import StatsSection from '../StatesSection/StateSection';
 import TopRatedMovies from '../TopRatedMovie/TopRatedMovies';
 import RecentlyAdded from '../RecentlyAdded/RecentlyAdded';
+import GenreSection from '../Genre/GenreSection';
+import AboutPlatform from '../AboutPlatform/About';
 
 const Home = () => {
     return (
@@ -14,6 +16,8 @@ const Home = () => {
             <StatsSection></StatsSection>
             <TopRatedMovies></TopRatedMovies>
             <RecentlyAdded></RecentlyAdded>
+            <GenreSection></GenreSection>
+            <AboutPlatform></AboutPlatform>
         </div>
     );
 };

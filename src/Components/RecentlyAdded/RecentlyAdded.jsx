@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxios from '../../Hooks/useAxios';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Parallax, Pagination, Navigation } from 'swiper/modules';
+import { Parallax, Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { motion } from "framer-motion";
 
 const RecentlyAdded = () => {
@@ -25,11 +25,15 @@ const RecentlyAdded = () => {
         parallax={true}
         pagination={{ clickable: true }}
         navigation={true}
-        modules={[Parallax, Pagination, Navigation]}
+        modules={[Parallax, Pagination, Navigation, Autoplay]}
+          autoplay={{
+          delay: 2000,
+          disableOnInteraction: false, 
+        }}
         className="mySwiper"
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >
-        {recentlyAdded.map((movie, index) => (
+        {recentlyAdded.map((movie) => (
           <SwiperSlide key={movie._id}>
             <div
               className="w-full h-[400px] md:h-[500px] rounded-2xl bg-cover bg-center relative"
