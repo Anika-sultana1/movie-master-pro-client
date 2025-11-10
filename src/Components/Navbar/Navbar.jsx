@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { PiFilmSlateFill } from 'react-icons/pi';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
 
@@ -11,7 +12,20 @@ const Navbar = () => {
     <NavLink className='m-2' to='/myCollection'>My Collection</NavLink>
   </>;
 
-  const { user } = useAuth();
+  const { user, logOutUser } = useAuth();
+const navigate= useNavigate();
+
+  const handleLogOut = ()=>{
+   logOutUser()
+   .then(result => {
+    console.log(result)
+    toast('Log Out Succed!')
+    navigate('/login')
+   })
+   .catch(error => {
+    console.log(error)
+   })
+  }
 
   return (
   
@@ -56,7 +70,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="User avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={user?.photoURL}
                   />
                 </div>
               </div>
@@ -65,11 +79,11 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li>
                   <a className="justify-between">
-                    Profile <span className="badge">New</span>
+                   {user?.displayName}
                   </a>
                 </li>
                 <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
+                <li onClick={handleLogOut}><a>Logout</a></li>
               </ul>
             </div>
           </div>
