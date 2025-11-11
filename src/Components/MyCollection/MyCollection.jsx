@@ -4,16 +4,18 @@ import useAuth from '../../Hooks/useAuth';
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaStar, FaTags } from 'react-icons/fa';
 import { Link } from 'react-router';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const MyCollection = () => {
 
-    const {user} = useAuth()
+    const {user, setloading} = useAuth()
 const axios = useAxios();
 const [myCollections, setMyCollections] = useState([])
 
 useEffect( ()=>{
 
-axios.get(`http://localhost:5000/movies/my-collection?email=${user?.email}`)
+axios.get(`/movies/my-collection?email=${user?.email}`)
 .then(result => {
     console.log(result.data)
     setMyCollections(result.data)
@@ -23,6 +25,35 @@ axios.get(`http://localhost:5000/movies/my-collection?email=${user?.email}`)
 })
 
 },[axios, user])
+
+const handleDelete = (movieId) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+        setloading(true)
+      axios.delete(`/movies/${movieId}`)
+        .then(res => {
+          if (res.data.deletedCount > 0) {
+            setMyCollections(myCollections.filter(m => m._id !== movieId))
+            toast.success('Movie deleted successfully')
+          }
+        })
+        .catch(error => {
+            setloading(false)
+          console.log(error)
+          toast.error('Delete failed')
+        })
+    }
+  });
+}
+
 
     return (
         <div className='pt-24'>
@@ -66,7 +97,7 @@ axios.get(`http://localhost:5000/movies/my-collection?email=${user?.email}`)
               {mycollection.director }
                   </span>
            <span className="flex items-center gap-1  text-3xl">
-              {mycollection.genre }
+              {mycollection.language }
                   </span>
            <span className="flex items-center gap-1  text-3xl">
               {mycollection.cast }
@@ -78,12 +109,12 @@ axios.get(`http://localhost:5000/movies/my-collection?email=${user?.email}`)
                 </p>
 
        <div className='flex gap-3'>
-                 <Link to={``}><button className="mt-3 w-[150px] py-1.5  bg-teal-600  text-white font-medium rounded-lg hover:bg-teal-700 transition">
+                 <Link to={`/movies/update/${mycollection._id}`}><button className="mt-3 w-[150px] py-1.5  bg-teal-600  text-white font-medium rounded-lg hover:bg-teal-700 transition">
                   Edit Details
                 </button></Link>
-                <Link to={``}><button className="mt-3 w-[150px] py-1.5 opacity-0 group-hover:opacity-100 bg-red-500 text-white font-medium rounded-lg hover:bg-teal-700 transition">
+                <button onClick={()=>handleDelete(mycollection._id)} className="mt-3 w-[150px] py-1.5 opacity-0 group-hover:opacity-100 bg-red-500 text-white font-medium rounded-lg hover:bg-teal-700 transition">
                   Delete 
-                </button></Link>
+                </button>
        </div>
                 <Link to={`/movies/${mycollection._id}`}><button className="mt-3 w-[300px] py-1.5 opacity-0 group-hover:opacity-100 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700 transition">
                   View Details

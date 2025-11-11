@@ -8,6 +8,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ViewDetails from "../ViewDetails/ViewDetails";
 import AddMovie from "../AddMovies/AddMovies";
+import UpdateMovieDetails from "../UpdateMovieDetails/UpdateMovieDetails";
 
 
 
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
         {
             path: '/myCollection',
             Component: MyCollection,
+        },
+        {
+            path: '/movies/update/:id',
+            Component: UpdateMovieDetails,
         },
         {
             path: '/movies/add',
