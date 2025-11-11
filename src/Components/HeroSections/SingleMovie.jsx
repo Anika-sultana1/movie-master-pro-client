@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 
 
@@ -25,7 +26,7 @@ const {title, posterUrl,plotSummary} = movie;
     <h2 className="card-title">{title}</h2>
     <p>{plotSummary}</p>
     <div className="card-actions justify-end">
-      <button className="btn-primary w-full">View movie details</button>
+      <button className="btn-primary w-full"><Link to={`/movies/${movie._id}`}>View movie details</Link></button>
     </div>
     </div>
 

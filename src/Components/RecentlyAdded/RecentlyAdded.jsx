@@ -3,6 +3,7 @@ import useAxios from '../../Hooks/useAxios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Parallax, Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { motion } from "framer-motion";
+import { Link } from 'react-router';
 
 const RecentlyAdded = () => {
   const axios = useAxios();
@@ -76,7 +77,7 @@ const RecentlyAdded = () => {
                   className="btn-primary w-full max-w-xs"
                   data-swiper-parallax="-100"
                 >
-                  View movie details
+                  <Link to={`/movies/${movie._id}`}>View movie details</Link>
                 </motion.button>
               </div>
             </div>

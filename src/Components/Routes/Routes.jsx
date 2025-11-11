@@ -6,6 +6,7 @@ import MyCollection from "../MyCollection/MyCollection";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import ViewDetails from "../ViewDetails/ViewDetails";
 
 
 export const router = createBrowserRouter([
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
         {
             path: '/myCollection',
             Component: MyCollection,
+        },
+        {
+            path: '/movies/:id',
+            Component: ViewDetails,
         },
         {
             path: '/login',

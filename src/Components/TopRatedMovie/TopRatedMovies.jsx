@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import useAxios from '../../Hooks/useAxios';
+import { Link } from 'react-router';
 
 const TopRatedMovies = () => {
   const axios = useAxios();
@@ -50,7 +51,7 @@ const TopRatedMovies = () => {
                   </span>
                 </div>
                 <p className="text-sm text-gray-700 line-clamp-3 mb-3">{movie.plotSummary}</p>
-                <button className="btn btn-primary w-full">View Movie Details</button>
+                <Link to={`/movies/${movie._id}`}><button className="btn btn-primary w-full">View Movie Details</button></Link>
               </div>
             </div>
           </SwiperSlide>
