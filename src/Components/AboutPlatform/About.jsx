@@ -3,6 +3,16 @@ import { motion } from "framer-motion";
 import { FaFilm, FaStar, FaCloudDownloadAlt, FaUserFriends } from "react-icons/fa";
 
 const AboutPlatform = () => {
+
+
+const about = [
+            { icon: <FaFilm />, title: "Vast Library", desc: "Access thousands of movies across all genres." },
+            { icon: <FaStar />, title: "Top Rated Picks", desc: "Discover trending and critically acclaimed films." },
+            { icon: <FaCloudDownloadAlt />, title: "Offline Mode", desc: "Save your favorites and watch anytime." },
+            { icon: <FaUserFriends />, title: "Community", desc: "Join a community of movie lovers worldwide." },
+          ]
+
+
   return (
     <section className="py-20 bg-gray-100 text-gray-800">
       <div className="max-w-6xl mx-auto px-6 text-center">
@@ -27,12 +37,8 @@ const AboutPlatform = () => {
         </motion.p>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { icon: <FaFilm />, title: "Vast Library", desc: "Access thousands of movies across all genres." },
-            { icon: <FaStar />, title: "Top Rated Picks", desc: "Discover trending and critically acclaimed films." },
-            { icon: <FaCloudDownloadAlt />, title: "Offline Mode", desc: "Save your favorites and watch anytime." },
-            { icon: <FaUserFriends />, title: "Community", desc: "Join a community of movie lovers worldwide." },
-          ].map((feature, index) => (
+          {
+          about.map((feature, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}

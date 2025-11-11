@@ -42,7 +42,7 @@ const GenreSection = () => {
   };
 
   return (
-    <div className="py-20 my-10 bg-gray-900 text-white">
+    <div className="py-20 my-10 bg-gray-700 text-white">
       <h2 className="text-4xl font-extrabold mb-12 text-white flex justify-center items-center gap-4">
         <FcSearch /> Browse By Genre
       </h2>
