@@ -1,14 +1,17 @@
 import React from 'react';
 import useAuth from '../../Hooks/useAuth';
-import { useNavigate } from 'react-router';
-import { toast, ToastContainer } from 'react-toastify';
+import { Link, useLocation, useNavigate } from 'react-router';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const Login = () => {
 
 const {signInUser, signInWithGoogle,} = useAuth();
 const navigate = useNavigate();
-
-
+const location = useLocation();
+const [error, setError] = useState('')
 
 const handleSignInUser = (e)=>{
   e.preventDefault();
@@ -18,12 +21,15 @@ const handleSignInUser = (e)=>{
 signInUser(email, password)
 .then(result=>{
   console.log(result)
+navigate(location?.pathname || '/')
+
   toast.success('Successfully Logged In')
-  navigate('/')
+
 
 })
 .catch(error => {
   console.log(error)
+  setError(error.message)
 })
 
 }
@@ -32,17 +38,19 @@ const handleGoogleSignIn = ()=>{
   signInWithGoogle()
   .then(result=>{
     console.log(result)
+    navigate(location?.pathname || '/')
+  
     toast.success('Successfully Logged In')
- 
+  
   })
   .catch(error => {
     console.log(error)
+    setError(error.message)
   })
-   navigate('/')
+  
 }
     return (
   <div className="hero bg-base-200 min-h-screen pt-20">
-      <ToastContainer position="top-center" autoClose={3000} />
       <div className="hero-content flex-col">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-bold mb-2">Log In Your Account</h1>
@@ -82,11 +90,13 @@ const handleGoogleSignIn = ()=>{
                   required
                 />
               </div>
-
+ {
+                  error && <p className="text-red-500 text-sm mt-1">{error}</p>
+                }
               <button type="submit" className="btn btn-neutral w-full mt-2">
-                Register
+               Login
               </button>
-
+<p>New to Our website? Please <Link className='underline' to='/register'>Register</Link></p>
               <div className="divider">OR</div>
 
               {/* Google */}

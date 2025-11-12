@@ -11,6 +11,7 @@ import Romance from '../../assets/icons8-romance-48.png';
 import Horror from '../../assets/icons8-horror-48.png';
 import Fantasy from '../../assets/icons8-fantasy-48.png';
 import Documentary from '../../assets/icons8-document-64.png';
+import { toast } from 'react-toastify';
 
 const staticGenres = [
   { name: "Action", icon: action },
@@ -28,7 +29,7 @@ const GenreSection = () => {
 
   const handleGenreClick = (genreName) => {
     console.log(`Navigating to genre: ${genreName}`);
-    alert(`You clicked ${genreName}. This should now filter the movies!`);
+    toast(`You clicked ${genreName}. This should now filter the movies!`);
   };
 
 

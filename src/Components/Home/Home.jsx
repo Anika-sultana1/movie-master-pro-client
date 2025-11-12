@@ -7,10 +7,11 @@ import RecentlyAdded from '../RecentlyAdded/RecentlyAdded';
 import GenreSection from '../Genre/GenreSection';
 import AboutPlatform from '../AboutPlatform/About';
 
+
 const Home = () => {
     return (
-        <div className='pt-10 bg-gray-100'>
-            
+        <div className=' bg-gray-100'>
+    
             <Banner></Banner>
             <HeroSection></HeroSection>
             <StatsSection></StatsSection>

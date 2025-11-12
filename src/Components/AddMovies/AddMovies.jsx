@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import useAxios from '../../Hooks/useAxios';
 import useAuth from '../../Hooks/useAuth';
 import {  useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { toast, ToastContainer } from 'react-toastify';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AddMovie = () => {
-    const axios = useAxiosSecure();
+    const axios = useAxios();
     const { user } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ setLoading(false)
 
     return (
         <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-24 py-10">
-            <ToastContainer></ToastContainer>
+        
             <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-3xl">
                 <h1 className="text-3xl font-bold mb-6">Add New Movie</h1>
 

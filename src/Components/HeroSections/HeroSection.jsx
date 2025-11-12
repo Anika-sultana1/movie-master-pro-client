@@ -10,17 +10,24 @@ import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
 const HeroSection = () => {
   const axios = useAxios();
   const [movies, setMovies] = useState([]);
+const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     axios.get('/movies')
       .then(res => {
         console.log('data is', res.data);
         setMovies(res.data);
       })
-      .catch(err => console.error(err));
-  }, []);
+      .catch(err => {
+        console.error(err)
+        setLoading(false)
+      });
+  }, [axios]);
 
   return (
+
+
     <div className="w-full py-10">
       <Swiper
         effect={'coverflow'}
@@ -52,6 +59,9 @@ const HeroSection = () => {
         ))
         }
       </Swiper>
+      {
+  loading ? <span className="loading loading-spinner loading-xl text-center"></span> : ' '
+}
     </div>
   );
 };

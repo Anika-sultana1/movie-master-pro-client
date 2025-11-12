@@ -22,11 +22,13 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOutUser()
       .then(() => {
-        toast('Log Out Success!');
+        toast.success('Log Out Success!');
+       
         navigate('/login');
       })
       .catch((error) => {
         console.log(error);
+        toast.error('Log Out Failed')
       });
   };
 

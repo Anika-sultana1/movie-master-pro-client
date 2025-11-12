@@ -4,19 +4,26 @@ import { FaStar, FaCalendarAlt, FaTags } from "react-icons/fa";
 import useAxios from "../../Hooks/useAxios";
 import { Link } from "react-router";
 
+
 const AllMovies = () => {
+const [loading, setLoading] = useState(true)
+
   const axios = useAxios();
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
+setLoading(true)
+
     axios
       .get("/movies")
       .then((result) => {
         console.log(result.data);
+        
         setMovies(result.data);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false)
       });
   }, [axios]);
 
@@ -31,8 +38,12 @@ const AllMovies = () => {
         >
           Explore <span className="text-teal-400">Movies</span>
         </motion.h2>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+{
+  loading ? 
+<span className="loading loading-spinner loading-xl text-center"></span> : 
+       ' '
+}
+ <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {movies.map((movie, index) => (
             <motion.div
               key={movie._id}

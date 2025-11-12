@@ -9,6 +9,7 @@ import Register from "../Register/Register";
 import ViewDetails from "../ViewDetails/ViewDetails";
 import AddMovie from "../AddMovies/AddMovies";
 import UpdateMovieDetails from "../UpdateMovieDetails/UpdateMovieDetails";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
         },
         {
             path: '/myCollection',
-            Component: MyCollection,
+            element: <PrivateRoutes><MyCollection></MyCollection></PrivateRoutes>,
         },
         {
             path: '/movies/update/:id',
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
         },
         {
             path: '/movies/:id',
-            Component: ViewDetails,
+          element: <PrivateRoutes><ViewDetails></ViewDetails></PrivateRoutes>
         },
         {
             path: '/login',

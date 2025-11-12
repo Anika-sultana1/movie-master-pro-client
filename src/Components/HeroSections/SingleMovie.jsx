@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 
 const SingleMovie = ({movie}) => {
-    console.log(movie)
+
 const {title, posterUrl,plotSummary} = movie;
 
 

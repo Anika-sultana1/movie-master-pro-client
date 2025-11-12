@@ -1,7 +1,7 @@
 
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import useAxios from '../../Hooks/useAxios';
 import { useState } from 'react';
 
@@ -10,6 +10,7 @@ const Register = () => {
   const [error, setError] = useState('')
   const { setUser, createUser, updateUser ,signInWithGoogle} = useAuth()
   const navigate = useNavigate()
+const [loading, setLoading] = useState(true)
 
   const handleCreateUser = (e) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ setError('Password must be at least 6 characters ')
             return;
     }
     console.log('email or password', email, password)
+    
     createUser(email, password)
       .then(result => {
         const user = result.user;
@@ -44,10 +46,12 @@ setError('Password must be at least 6 characters ')
               email: user.email,
               image: user.image,
             }
+            setLoading(true)
             axios.post('/users', newUser)
               .then(data => {
                 console.log(data)
-                toast.success('Your Registration succeed. Welcome to Our Website!')
+                toast.success('Your Registration succeed. Welcome to Our Website!') 
+                setLoading(false)
                 navigate('/')
               })
 
@@ -57,6 +61,8 @@ setError('Password must be at least 6 characters ')
       })
       .catch(error => {
         console.log(error)
+        setLoading(false)
+        setError(error.message)
         toast.error('Registration failed!')
       })
 
@@ -79,17 +85,19 @@ const handleGoogleSignIn = ()=>{
     .then( (data)=>{
       console.log(data)
                 toast.success('Your Registration succeed. Welcome to Our Website!')
+                
                 navigate('/')
     })
   })
   .catch(error => {
     console.log(error)
+    toast.error('Your Registration failed')
   })
 }
 
   return (
     <div className="hero bg-base-200 min-h-screen pt-20">
-      <ToastContainer position="top-center" autoClose={3000} />
+   
       <div className="hero-content flex-col">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-bold mb-2">Create Your Account</h1>
@@ -98,6 +106,9 @@ const handleGoogleSignIn = ()=>{
 
         <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
           <div className="card-body">
+            {
+              loading && <span className="loading loading-spinner loading-xl text-center"></span>
+            }
             <form onSubmit={handleCreateUser} className="space-y-4">
               {/* Name */}
               <div>
@@ -160,7 +171,7 @@ const handleGoogleSignIn = ()=>{
               <button type="submit" className="btn btn-neutral w-full mt-2">
                 Register
               </button>
-
+<p>Already have an account? Please <Link className='underline' to='/login'>Login</Link></p>
               <div className="divider">OR</div>
 
               {/* Google */}

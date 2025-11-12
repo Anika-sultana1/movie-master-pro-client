@@ -9,19 +9,22 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const MyCollection = () => {
 
-    const {user, setloading} = useAuth()
+  const {user} = useAuth()
+  const [loading, setLoading] = useState(true)
 const axios = useAxiosSecure();
 const [myCollections, setMyCollections] = useState([])
 
 useEffect( ()=>{
-
+setLoading(true)
 axios.get(`/movies/my-collection?email=${user?.email}`)
 .then(result => {
     console.log(result.data)
     setMyCollections(result.data)
+    setLoading(false)
 })
 .catch(error => {
     console.log(error)
+    setLoading(false)
 })
 
 },[axios, user])
@@ -29,7 +32,7 @@ axios.get(`/movies/my-collection?email=${user?.email}`)
 const handleDelete = (movieId) => {
   Swal.fire({
     title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    text: "Are you sure to delte this permenently!!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
@@ -37,28 +40,53 @@ const handleDelete = (movieId) => {
     confirmButtonText: "Yes, delete it!"
   }).then((result) => {
     if (result.isConfirmed) {
-        setloading(true)
+          setLoading(true)
       axios.delete(`/movies/${movieId}`)
         .then(res => {
+        
           if (res.data.deletedCount > 0) {
             setMyCollections(myCollections.filter(m => m._id !== movieId))
             toast.success('Movie deleted successfully')
+              setLoading(false)
           }
         })
         .catch(error => {
-            setloading(false)
+          setLoading(false)
           console.log(error)
           toast.error('Delete failed')
         })
+         
     }
   });
 }
 
 
     return (
+
+
+
         <div className='pt-24'>
             <h1 className='font-bold text-4xl text-center my-5'>My Collections</h1>
-            <div>
+
+  <div>
+              {
+              loading ? <span className="loading loading-spinner loading-xl"></span> : 
+               myCollections.length === 0 ? (
+      <div className='text-center mt-10'>
+        <h2 className='text-2xl font-semibold text-gray-600 mb-4'>
+          You don’t have any movies yet.
+        </h2>
+        <p className='text-gray-500 mb-6'>
+          Please add your movies to see them here.
+        </p>
+        <Link to="/add-movie">
+          <button className='bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition'>
+            Add Movie
+          </button>
+        </Link>
+      </div>
+    ) :
+               <div>
                 {
                     myCollections.map((mycollection,index) =>  <motion.div
               key={mycollection._id}
@@ -123,6 +151,11 @@ const handleDelete = (movieId) => {
             </motion.div>)
                 }
             </div>
+            }
+          </div>
+
+           
+        
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const UpdateMovieDetails = () => {
-  const { loading} = useAuth();
+const [loading, setLoading] = useState(true)
   const navigate = useNavigate();
   const { id } = useParams();
   const axios = useAxiosSecure();
@@ -52,18 +52,21 @@ const UpdateMovieDetails = () => {
 
     const { addedBy, ...updatedData } = formData;
 console.log(addedBy)
+setLoading(true)
     axios
       .patch(`/movies/update/${id}`, updatedData)
       .then((result) => {
         if (result.data.modifiedCount) {
           toast.success('Movie updated successfully!');
           navigate('/myCollection');
+        setLoading(false)
         } else {
           toast.info('No changes were made.');
         }
       })
       .catch((error) => {
         console.error(error);
+        setLoading(false)
         toast.error('Movie update failed');
       })
 
