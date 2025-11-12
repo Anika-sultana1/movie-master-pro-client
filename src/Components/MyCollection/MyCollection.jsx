@@ -93,13 +93,13 @@ const handleDelete = (movieId) => {
                
        
                 </div>
-           <span className="flex items-center gap-1  text-3xl">
+           <span className="flex items-center gap-1 ">
               {mycollection.director }
                   </span>
-           <span className="flex items-center gap-1  text-3xl">
+           <span className="flex items-center gap-1  text-xl">
               {mycollection.language }
                   </span>
-           <span className="flex items-center gap-1  text-3xl">
+           <span className="flex items-center gap-1  text-2xl">
               {mycollection.cast }
                   </span>
                 <p className=" text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-2 text-xl">
