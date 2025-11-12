@@ -10,7 +10,7 @@ const Register = () => {
   const [error, setError] = useState('')
   const { setUser, createUser, updateUser ,signInWithGoogle} = useAuth()
   const navigate = useNavigate()
-const [loading, setLoading] = useState(true)
+const [loading, setLoading] = useState(false)
 
   const handleCreateUser = (e) => {
     e.preventDefault();
@@ -46,12 +46,14 @@ setError('Password must be at least 6 characters ')
               email: user.email,
               image: user.image,
             }
-            setLoading(true)
+             setLoading(true)
             axios.post('/users', newUser)
+           
               .then(data => {
+                setLoading(false)
                 console.log(data)
                 toast.success('Your Registration succeed. Welcome to Our Website!') 
-                setLoading(false)
+                
                 navigate('/')
               })
 
@@ -169,7 +171,7 @@ const handleGoogleSignIn = ()=>{
               </div>
 
               <button type="submit" className="btn btn-neutral w-full mt-2">
-                Register
+                Create Account
               </button>
 <p>Already have an account? Please <Link className='underline' to='/login'>Login</Link></p>
               <div className="divider">OR</div>

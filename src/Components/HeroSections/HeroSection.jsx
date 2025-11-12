@@ -16,6 +16,7 @@ const [loading, setLoading] = useState(true)
     setLoading(true)
     axios.get('/movies')
       .then(res => {
+        setLoading(false)
         console.log('data is', res.data);
         setMovies(res.data);
       })
