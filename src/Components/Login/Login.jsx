@@ -19,7 +19,7 @@ const handleSignInUser = (e)=>{
  
 signInUser(email, password)
 .then(result=>{
-  
+  console.log(result)
 navigate('/')
 
   toast.success('Successfully Logged In')

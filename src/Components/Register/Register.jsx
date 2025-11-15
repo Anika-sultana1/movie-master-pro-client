@@ -2,11 +2,11 @@
 import { Link, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
-import useAxios from '../../Hooks/useAxios';
 import { useState } from 'react';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Register = () => {
-  const axios = useAxios();
+  const axios = useAxiosSecure();
   const [error, setError] = useState('')
   const { setUser, createUser, updateUser ,signInWithGoogle} = useAuth()
   const navigate = useNavigate()
@@ -95,7 +95,7 @@ setError('Password must be at least 6 characters ')
     } 
     catch (err) {
       console.log(err)
-      toast.error('Your Registration failed!')
+      toast.error(err.message)
     } 
     finally {
       setLoading(false)

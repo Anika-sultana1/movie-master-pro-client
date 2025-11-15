@@ -38,7 +38,7 @@ useEffect( ()=>
 {
   const counts = {}
   staticGenres.forEach((genre)=>{
-    axios.get(`/movies?genre=${genre.name}`)
+    axios.get(`/movies/filter?genre=${genre.name}`)
     .then(res => {
       console.log(res.data)
       counts[genre.name]= res.data.length
