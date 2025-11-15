@@ -31,7 +31,7 @@ setError('Password must be at least 6 characters ')
             return;
     }
     console.log('email or password', email, password)
-    
+     setLoading(true)
     createUser(email, password)
       .then(result => {
         const user = result.user;
@@ -39,14 +39,14 @@ setError('Password must be at least 6 characters ')
         updateUser({ displayName: name, photoURL: photoUrl })
           .then(() => {
 
-            setUser({ displayName: name, photoURL: photoUrl })
+            setUser({...user, displayName: name, photoURL: photoUrl })
 
             const newUser = {
-              name: user.displayName,
+              name: name,
               email: user.email,
-              image: user.image,
+              image: photoUrl,
             }
-             setLoading(true)
+            
             axios.post('/users', newUser)
            
               .then(data => {
@@ -56,8 +56,14 @@ setError('Password must be at least 6 characters ')
                 
                 navigate('/')
               })
+          
 
           })
+               .catch(err => {
+                setLoading(false)
+                console.log(err)
+                toast.error('Failed to save user to backend!')
+              })
 
 
       })
@@ -65,37 +71,36 @@ setError('Password must be at least 6 characters ')
         console.log(error)
         setLoading(false)
         setError(error.message)
-        toast.error('Registration failed!')
+        toast.error(error.message)
       })
 
   }
 
-const handleGoogleSignIn = ()=>{
-  signInWithGoogle()
-  .then(result => {
-    console.log(result.user)
+ const handleGoogleSignIn = async () => {
+    try {
+      setLoading(true)
+      const result = await signInWithGoogle()
+      const user = result.user
+      setUser(user)
 
+      const newUser = {
+        name: user.displayName,
+        email: user.email,
+        image: user.photoURL
+      }
 
-
-    const user = result.user
-       const newUser = {
-              name: user.displayName,
-              email: user.email,
-              image: user.image,
-            }
-    axios.post('/users',newUser )
-    .then( (data)=>{
-      console.log(data)
-                toast.success('Your Registration succeed. Welcome to Our Website!')
-                
-                navigate('/')
-    })
-  })
-  .catch(error => {
-    console.log(error)
-    toast.error('Your Registration failed')
-  })
-}
+      await axios.post('/users', newUser)
+      toast.success('Your Registration succeed. Welcome to Our Website!')
+      navigate('/')
+    } 
+    catch (err) {
+      console.log(err)
+      toast.error('Your Registration failed!')
+    } 
+    finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="hero bg-base-200 min-h-screen pt-20">
