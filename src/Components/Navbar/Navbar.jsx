@@ -5,76 +5,84 @@ import { PiFilmSlateFill } from 'react-icons/pi';
 import { toast } from 'react-toastify';
 import { FaPlus } from 'react-icons/fa';
 import { motion } from "framer-motion";
+import { CiBoxList, CiHome } from "react-icons/ci";
+import { BiMoviePlay } from "react-icons/bi";
+import { BsCollectionPlay } from "react-icons/bs";
 
 const Navbar = () => {
 
   const links = (
     <>
-      <NavLink className='m-2' to='/'>Home</NavLink>
-      <NavLink className='m-2' to='/allMovies'>All Movies</NavLink>
-      <NavLink className='m-2' to='/myCollection'>My Collection</NavLink>
-      <NavLink className='m-2' to='/myWatchlist'>My Watchlist</NavLink>
+      <NavLink className={`flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-700 transition-all`} to='/'>
+        <CiHome className='text-lg' /> Home
+      </NavLink>
+      <NavLink className={`flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-700 transition-all`} to='/allMovies'>
+        <BiMoviePlay className='text-lg' /> All Movies
+      </NavLink>
+      <NavLink className={`flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-700 transition-all`} to='/myCollection'>
+        <BsCollectionPlay className='text-lg' /> My Collection
+      </NavLink>
+      <NavLink className={`flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-teal-100 hover:text-teal-700 transition-all`} to='/myWatchlist'>
+        <CiBoxList className='text-lg' /> My Watchlist
+      </NavLink>
     </>
   );
 
   const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
-const [theme, setTheme] = useState( ()=>{
-  localStorage.getItem("theme")  || 'light'
-})
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || 'light');
 
-useEffect( ()=>{
-  document.documentElement.setAttribute('data-theme', theme)
-localStorage.setItem('theme', theme)
-})
-const handleToggle = ()=>{
-  setTheme(theme === 'light' ? "dark" : "light" )
-}
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const handleToggle = () => setTheme(theme === "light" ? "dark" : "light");
 
   const handleLogOut = () => {
     logOutUser()
       .then(() => {
         toast.success('Log Out Success!');
-       
         navigate('/login');
       })
-      .catch((error) => {
-        console.log(error);
-        toast.error('Log Out Failed')
-      });
+      .catch(() => toast.error('Log Out Failed'));
   };
 
   return (
-    <div className="navbar fixed top-0 left-0 right-0 z-50 bg-base-100 shadow-md">
+    <div className="navbar fixed top-0 left-0 right-0 z-50 bg-gray-300 shadow-md border-b border-gray-200 px-6 lg:px-8">
+      
 
-      <div className="navbar-start">
+      <div className="navbar-start flex items-center gap-4">
+
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
+          <div tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
               viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round"
                 strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
+          <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-white rounded-lg mt-3 w-52 p-2 shadow-lg">
             {links}
           </ul>
         </div>
 
-        <div className="flex items-center gap-2 text-xl font-semibold">
-          <PiFilmSlateFill className="text-teal-500 text-2xl" />
-          <span>Movie Master Pro</span>
+        {/* Logo */}
+        <div className="flex items-center gap-2">
+          <PiFilmSlateFill className="text-teal-500 text-3xl animate-pulse" />
+          <span className="font-extrabold text-xl lg:text-2xl text-gray-900 hover:text-teal-600 transition-all">Movie Master Pro</span>
         </div>
       </div>
 
- 
+      {/* Center: Desktop Links */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
       </div>
 
+      {/* Right: Search + Add + User */}
+      <div className="navbar-end flex items-center gap-4">
 
+      
       {user ? (
         <div className="navbar-end flex items-center gap-4">
           <input
@@ -100,7 +108,7 @@ const handleToggle = ()=>{
                 className="flex items-center gap-2 px-4 py-2 bg-teal-500 text-white font-medium rounded-lg shadow-md hover:bg-teal-600 transition-all"
               >
                 <FaPlus className="text-white" />
-                <span className="hidden md:inline">Add Movie</span>
+                
               </motion.button>
             </Link>
           </motion.div>
@@ -150,6 +158,7 @@ const handleToggle = ()=>{
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 };

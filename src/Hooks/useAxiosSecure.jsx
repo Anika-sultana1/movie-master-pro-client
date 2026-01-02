@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
-    baseURL: 'https://movie-master-pro-server-xi.vercel.app'
+    baseURL: 'http://localhost:3000'
 })
 
 

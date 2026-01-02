@@ -25,8 +25,8 @@ const StatsSection = () => {
 
 
     return (
-        <div className="py-16 bg-gray-900 text-white">
-            <h2 className="text-3xl font-bold text-center mb-10 flex items-center justify-center gap-2 "><PiFilmSlateFill /> MovieMaster Pro - By The Numbers</h2>
+        <div className="py-16  text-white">
+            <h2 className="text-xl text-gray-600 font-bold  mb-10 flex items-center justify-center gap-2 "><PiFilmSlateFill /> MovieMaster Pro - By The Numbers</h2>
             <div className="flex justify-center space-x-8 max-w-4xl mx-auto">
                <div  className="text-center p-6 bg-gray-800 rounded-xl shadow-lg w-64 transform transition duration-500 hover:scale-105  flex flex-col justify-center items-center">
                  <div className="text-5xl mb-2">

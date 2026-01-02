@@ -69,8 +69,8 @@ useEffect( ()=>
   };
 
   return (
-    <div className="py-20 my-10 bg-gray-700 text-white">
-      <h2 className="text-4xl font-extrabold mb-12 text-white flex justify-center items-center gap-4">
+    <div className="py-20 my-10  text-white rounded-2xl mx-12 shadow-2xl">
+      <h2 className="text-xl font-extrabold mb-12 text-gray-600 flex justify-center items-center gap-4">
         <FcSearch /> Browse By Genre
       </h2>
 

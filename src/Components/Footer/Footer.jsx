@@ -1,15 +1,13 @@
 import React from "react";
 import { PiFilmSlateFill } from "react-icons/pi";
+import Logo from "../logo/Logo";
 
 const Footer = () => {
   return (
     <footer className="footer pt-25 pb-10 bg-neutral text-neutral-content relative  overflow-hidden">
 
       <div className="absolute inset-0 bg-gradient-to-r from-gray-400 via-blue-600 to-teal-600 opacity-20 animate-pulse pointer-events-none"></div>
-      <div className="md:ml-50 flex items-center gap-2 text-xl font-semibold">
-        <PiFilmSlateFill className="text-teal-500 text-2xl" />
-        <span>Movie Master Pro</span>
-      </div>
+    <Logo></Logo>
       <div className="relative z-10 grid grid-cols-1 justify-center md:ml-52 sm:grid-cols-4 gap-36">
 
 

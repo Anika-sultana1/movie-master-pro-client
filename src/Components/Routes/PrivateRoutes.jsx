@@ -1,13 +1,14 @@
 import React from 'react';
 import useAuth from '../../Hooks/useAuth'
 import { Navigate } from 'react-router';
+import FullScreenLoader from '../FullScreenLoader';
 
 const PrivateRoutes = ({children}) => {
 
     const {user, loading} = useAuth()
 
 if(loading){
-    return  <span className="loading loading-spinner text-success"></span>
+return <FullScreenLoader></FullScreenLoader>
 }
 
 if(user){

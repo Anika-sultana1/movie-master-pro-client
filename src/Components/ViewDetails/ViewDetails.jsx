@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import useAxios from '../../Hooks/useAxios';
 import { Link, useParams } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
+import bgImage from '../../assets/backround.jpeg'
+import { FiYoutube } from "react-icons/fi";
 
 import { FaEdit, FaStar, FaTrashAlt, } from 'react-icons/fa';
+import FullScreenLoader from '../FullScreenLoader';
 
 const ViewDetails = () => {
     const axios = useAxios();
@@ -30,7 +33,7 @@ const ViewDetails = () => {
         return (
             <div className="min-h-screen flex justify-center items-center">
 
-                <span className="loading loading-ring loading-lg text-primary"></span>
+           <FullScreenLoader></FullScreenLoader>
             </div>
         );
     }
@@ -48,8 +51,50 @@ const ViewDetails = () => {
 
 
     return (
+<div>
+            <div className="relative  min-h-screen rounded-xl overflow-hidden shadow-lg">
+  {/* Background Image */}
+  <img
+    src={bgImage}
+    alt="Movie Poster"
+    className="w-[1450px] h-[700px] object-cover"
+  />
+
+  {/* Overlay for better text readability */}
+  <div className="absolute inset-0 bg-black/40"></div>
+
+  {/* Text Content */}
+  <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+    <h2 className="text-white text-4xl font-bold mb-2">
+      Movies Page
+    </h2>
+    <p className="text-gray-300 text-2xl mt-5 mb-10">
+     Step into the world of this movie where every scene tells a story. Explore the plot, characters, and emotions that make this film a memorable cinematic experience.
+    </p>
+   <a
+  href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
+    details.title + " full movie"
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+   className="
+    btn w-[200px] flex items-center gap-2
+    bg-gray-200 text-black
+    hover:bg-[#e50916] hover:text-black
+    transition-all duration-300
+  "
+>
+  <FiYoutube /> Watch Now
+</a>
+
+  </div>
+</div>
         <div className="min-h-screen p-6 lg:p-12 mt-24">
-            <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row transform hover:shadow-3xl transition duration-300">
+
+
+
+
+            <div className=" mx-auto bg-white rounded-2xl  overflow-hidden flex flex-col lg:flex-row transform hover:shadow-3xl transition duration-300">
 
 
                 <div className="lg:w-1/3 bg-gray-100 flex-shrink-0">
@@ -137,6 +182,7 @@ const ViewDetails = () => {
             </div>
            
         </div>
+</div>
     );
 };
 

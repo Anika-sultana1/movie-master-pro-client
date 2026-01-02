@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
         },
         {
             path: '/movies/:id',
-          element: <PrivateRoutes><ViewDetails></ViewDetails></PrivateRoutes>
+          element: <ViewDetails></ViewDetails>
         },
         {
             path: '/login',

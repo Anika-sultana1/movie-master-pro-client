@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import FullScreenLoader from '../FullScreenLoader';
 
 const MyCollection = () => {
 
@@ -70,7 +71,7 @@ const handleDelete = (movieId) => {
 
   <div>
               {
-              loading ? <span className="loading loading-spinner loading-xl"></span> : 
+              loading ? <FullScreenLoader></FullScreenLoader> : 
                myCollections.length === 0 ? (
       <div className='text-center mt-10'>
         <h2 className='text-2xl font-semibold text-gray-600 mb-4'>

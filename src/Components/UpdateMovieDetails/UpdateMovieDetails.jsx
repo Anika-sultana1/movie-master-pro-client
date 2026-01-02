@@ -3,6 +3,7 @@ import useAuth from '../../Hooks/useAuth';
 import { useNavigate, useParams } from 'react-router';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import FullScreenLoader from '../FullScreenLoader';
 
 const UpdateMovieDetails = () => {
 const [loading, setLoading] = useState(true)
@@ -184,7 +185,7 @@ setLoading(true)
           className={`btn btn-primary mt-4 ${loading ? 'loading' : ''}`}
           disabled={loading}
         >
-          {loading ? 'Updating...' : 'Update'}
+          {loading ? <FullScreenLoader></FullScreenLoader> : 'Update'}
         </button>
       </form>
     </div>

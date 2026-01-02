@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import useAuth from '../../Hooks/useAuth'
 import { toast } from "react-toastify";
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import FullScreenLoader from "../FullScreenLoader";
 
 const AllMovies = () => {
 const [loading, setLoading] = useState(true)
@@ -56,13 +57,12 @@ setLoading(true)
           Explore <span className="text-teal-400">Movies</span>
         </motion.h2>
 {
-  loading ? 
-<span className="loading loading-spinner loading-xl text-center"></span> : 
-       ' '
+  loading && <FullScreenLoader></FullScreenLoader>
 }
  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {
           movies.map((movie, index) => (
+         <Link to={`/movies/${movie._id}`}>
             <motion.div
               key={movie._id}
               initial={{ opacity: 0, y: 40 }}
@@ -100,10 +100,6 @@ setLoading(true)
                     ? movie.plotSummary.slice(0, 120) + "..."
                     : movie.plotSummary}
                 </p>
-
-                <Link to={`/movies/${movie._id}`}><button className="mt-3 w-full py-1.5 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700 transition">
-                  View Details
-                </button></Link>
                 <button
   onClick={() => handleAddToWatchlist(movie._id)}
   className="mt-2 w-full py-1.5 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
@@ -111,7 +107,7 @@ setLoading(true)
   Add to Watchlist
 </button>
               </div>
-            </motion.div>
+            </motion.div></Link>
           ))}
         </div>
 

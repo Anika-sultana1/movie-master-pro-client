@@ -4,6 +4,8 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import {  useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { toast, ToastContainer } from 'react-toastify';
+import bgImage from '../../assets/forest-golden-hour-time.jpg'
+import FullScreenLoader from '../FullScreenLoader';
 
 const AddMovie = () => {
     const axios = useAxiosSecure();
@@ -53,10 +55,12 @@ setLoading(false)
 
 
     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-24 py-10">
+        <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-24 py-10"
+          style={{ backgroundImage: `url(${bgImage})` }}
+          >
         
             <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-3xl">
-                <h1 className="text-3xl font-bold mb-6">Add New Movie</h1>
+                <h1 className="text-3xl text-gray-600 font-bold mb-6">Add New Movie</h1>
 
                 {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -80,7 +84,7 @@ setLoading(false)
 
                     <button type="submit" className={`btn btn-primary mt-4 ${loading ? 'loading' : ''}`} disabled={loading}
                     >
-                        {loading ? 'Adding...' : 'Add Movie'}
+                        {loading ? <FullScreenLoader></FullScreenLoader> : 'Add Movie'}
                     </button>
                 </form>
 
