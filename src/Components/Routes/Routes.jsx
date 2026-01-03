@@ -11,13 +11,15 @@ import AddMovie from "../AddMovies/AddMovies";
 import UpdateMovieDetails from "../UpdateMovieDetails/UpdateMovieDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import Watchlist from "../AllMovies/Watchlist";
-import Dashboard from "../dashboard/Dashboard";
 import Services from "../ExtraSections/Services";
 import Blog from "../ExtraSections/Blog";
 import PrivacyPollicy from "../ExtraSections/PrivacyPollicy";
 import AboutPlatform from "../AboutPlatform/About";
 import Contact from "../ExtraSections/Contact";
 import Cookie from "../ExtraSections/Cookie";
+import Testimonial from "../ExtraSections/Testimonial";
+import NewsLetter from "../ExtraSections/NewsLetter";
+import DashboardHome from "../dashboard/DashboardHome";
 
 
 
@@ -57,6 +59,14 @@ export const router = createBrowserRouter([
             Component: Contact,
         },
         {
+            path: '/testimonial',
+            Component: Testimonial,
+        },
+        {
+            path: '/news-letter',
+            Component: NewsLetter,
+        },
+        {
             path: '/cookies',
             Component: Cookie,
         },
@@ -93,6 +103,6 @@ export const router = createBrowserRouter([
   {
     
     path: 'dashboard',
-    element: <Dashboard></Dashboard>
+    element: <DashboardHome></DashboardHome>
   }
 ]);

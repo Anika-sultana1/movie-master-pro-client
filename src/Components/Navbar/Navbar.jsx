@@ -5,13 +5,15 @@ import { PiFilmSlateFill } from 'react-icons/pi';
 import { toast } from 'react-toastify';
 import { FaPlus } from 'react-icons/fa';
 import { motion } from "framer-motion";
-import { CiBoxList, CiHome } from "react-icons/ci";
+import { CiBoxList, CiHome, CiLogout } from "react-icons/ci";
 import { BiCookie, BiMoviePlay } from "react-icons/bi";
 import { BsCollectionPlay } from "react-icons/bs";
 import { MdOutlineDashboardCustomize, MdOutlineFeaturedPlayList, MdOutlineHomeRepairService, MdOutlinePrivacyTip, MdOutlineRecentActors, MdOutlineRoundaboutLeft } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
 import { GrBlog } from "react-icons/gr";
 import { IoStatsChartOutline } from "react-icons/io5";
+import { GoCodeReview } from "react-icons/go";
+import { AiOutlineMail } from "react-icons/ai";
 
 
 const Navbar = ({ setActiveSection, activeSection }) => {
@@ -63,12 +65,43 @@ const Navbar = ({ setActiveSection, activeSection }) => {
     }
   };
 
-  const publicLinks = (
-    <>
-      <NavLink to="/" className={navItemClass}><CiHome /> Home</NavLink>
-      <NavLink to="/allMovies" className={navItemClass}><BiMoviePlay /> All Movies</NavLink>
-    </>
-  );
+const publicLinks = (
+  <>
+    {/* Home */}
+    <NavLink
+      to="/"
+      className={`${navItemClass} relative group text-2xl`}
+    >
+      <CiHome />
+
+      {/* Tooltip */}
+      <span
+        className="absolute -bottom-10 left-1/2 -translate-x-1/2
+        scale-0 group-hover:scale-100 transition-transform
+        bg-black text-white text-xs px-3 py-1 rounded-md whitespace-nowrap"
+      >
+        Home
+      </span>
+    </NavLink>
+
+    {/* All Movies */}
+    <NavLink
+      to="/allMovies"
+      className={`${navItemClass} relative group text-2xl`}
+    >
+      <BiMoviePlay />
+
+      {/* Tooltip */}
+      <span
+        className="absolute -bottom-10 left-1/2 -translate-x-1/2
+        scale-0 group-hover:scale-100 transition-transform
+        bg-black text-white text-xs px-3 py-1 rounded-md whitespace-nowrap"
+      >
+        All Movies
+      </span>
+    </NavLink>
+  </>
+);
 
   const defaultLinks = (
     <>
@@ -77,6 +110,8 @@ const Navbar = ({ setActiveSection, activeSection }) => {
       <NavLink to="/privacy-policy" className={navItemClass}><MdOutlinePrivacyTip /> Privacy Policy</NavLink>
       <NavLink to="/cookies" className={navItemClass}><BiCookie /> Cookie Policy</NavLink>
       <NavLink to="/blogs" className={navItemClass}><BiCookie /> Blog</NavLink>
+      <NavLink to="/testimonial" className={navItemClass}><BiCookie /> Testimonial</NavLink>
+      <NavLink to="/news-letter" className={navItemClass}><BiCookie /> News Letter</NavLink>
       <NavLink to="/services" className={navItemClass}><MdOutlineHomeRepairService /> Services</NavLink>
     </>
   );
@@ -97,7 +132,9 @@ const scrollLinks = [
   
   { id: "services", label: "Services", icon: <MdOutlineFeaturedPlayList /> },
   { id: "blog", label: "Blog", icon:<GrBlog /> },
-  { id: "about", label: "About", icon: <MdOutlinePrivacyTip /> },
+  { id: "news-letter", label: "News Letter", icon:<AiOutlineMail />},
+  { id: "testimonial", label: "Testimonial", icon:<GoCodeReview />},
+  { id: "about", label: "About", icon:<MdOutlineRoundaboutLeft /> },
 ];
 
   return (
@@ -183,11 +220,11 @@ const scrollLinks = [
               </div>
               <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
                 <li><a>{user?.displayName}</a></li>
-                <li onClick={handleToggle}>
+                <li className='cursor-pointer' onClick={handleToggle}>
                   {theme === "light" ? " Light" : " Dark"}
                 </li>
                 {defaultLinks}
-                <li onClick={handleLogOut}><a>Logout</a></li>
+                <li className='text-red-500' onClick={handleLogOut}><a><CiLogout /> Logout</a></li>
               </ul>
             </div>
           </>

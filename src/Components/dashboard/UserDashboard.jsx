@@ -15,7 +15,7 @@ import Logo from "../logo/Logo";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const Dashboard = () => {
+const UserDashboard = () => {
   const axiosSecure = useAxiosSecure();
   const [myMovies, setMyMovies] = useState([]);
   const [stats, setStats] = useState({ totalMovies: 0, totalUsers: 0 });
@@ -32,7 +32,7 @@ const Dashboard = () => {
 
         axiosSecure.get("/movies/my-collection")
         .then(res=> {
-        setMyMovies(Array.isArray(res.data) ? res.data : []);
+        setMyMovies((res.data) ? res.data : []);
         setLoading(false);
         
         })
@@ -94,9 +94,10 @@ const Dashboard = () => {
           className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 bg-base-200/50 p-6 rounded-[2.5rem] border border-base-300 backdrop-blur-md shadow-sm"
         >
           <div className="flex items-center gap-6">
+           <Link to='/'> 
             <div className="bg-white dark:bg-base-100 p-4 rounded-3xl shadow-lg ring-1 ring-base-300">
               <Logo />
-            </div>
+            </div></Link>
             <div className="hidden md:block h-12 w-[2px] bg-base-300" />
             <div className="text-center md:text-left">
               <h1 className="text-3xl font-black italic tracking-tight">Studio Pro</h1>
@@ -274,4 +275,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserDashboard;

@@ -12,6 +12,8 @@ import Blog from '../ExtraSections/Blog';
 import PrivacyPollicy from '../ExtraSections/PrivacyPollicy';
 import Contact from '../ExtraSections/Contact';
 import Cookie from '../ExtraSections/Cookie';
+import Testimonials from '../ExtraSections/Testimonial';
+import Newsletter from '../ExtraSections/NewsLetter';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
@@ -62,6 +64,12 @@ const Home = () => {
         <Blog />
       </motion.div>
 
+      <motion.div id="testimonial" initial="hidden" whileInView="visible" variants={fadeInUp} viewport={{ once: true }}>
+        <Testimonials></Testimonials>
+      </motion.div>
+      <motion.div id="news-letter" initial="hidden" whileInView="visible" variants={fadeInUp} viewport={{ once: true }}>
+        <Newsletter></Newsletter>
+      </motion.div>
       <motion.div id="contact" initial="hidden" whileInView="visible" variants={fadeInUp} viewport={{ once: true }}>
         <Contact />
       </motion.div>
