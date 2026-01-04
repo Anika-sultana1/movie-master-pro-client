@@ -6,6 +6,7 @@ MovieMaster Pro is a modern and responsive movie management platform where users
 
 ## 🔗 Live Project
 - **Client Live Link:** [https://movie-master-auth.web.app/](https://movie-master-auth.web.app/)  
+**Server Live Link:** [https://movie-master-pro-server-self.vercel.app/]
 
 - **GitHub Client Repository:** [https://github.com/Rabeya-Khatun1/movie-master-pro-client](https://github.com/Rabeya-Khatun1/movie-master-pro-client)  
 - **GitHub Server Repository:** [https://github.com/Rabeya-Khatun1/movie-master-pro-server](https://github.com/Rabeya-Khatun1/movie-master-pro-server)

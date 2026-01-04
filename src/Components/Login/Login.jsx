@@ -63,6 +63,7 @@ const Login = () => {
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+      <title>MOVIEMASTERpro | Login</title>
       {loading && <FullScreenLoader />}
 
       <motion.div

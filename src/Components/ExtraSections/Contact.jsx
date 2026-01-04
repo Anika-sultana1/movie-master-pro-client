@@ -63,10 +63,11 @@ const [showToast, setShowToast] = useState(false);
                         <div className="p-8 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-[2.5rem]">
                             <h3 className="font-bold mb-4">Follow Our Updates</h3>
                             <div className="flex gap-4">
-                                <button className="btn btn-circle bg-teal-500 btn-outline">FB</button>
-                                <button className="btn btn-circle bg-teal-500 btn-outline">TW</button>
-                                <button className="btn btn-circle bg-teal-500 btn-outline">LN</button>
-                                <button className="btn btn-circle bg-teal-500 btn-outline">GH</button>
+                               <a href="https://www.facebook.com/" target='_blank'> <button className="btn btn-circle bg-teal-500 btn-outline">FB</button></a>
+                               <a href="https://x.com/" target='_blank'> <button className="btn btn-circle bg-teal-500 btn-outline">TW</button></a>
+                               <a href="https://www.linkedin.com/feed/" target='_blank'> <button className="btn btn-circle bg-teal-500 btn-outline">LD</button></a>
+                               <a href="https://github.com/" target='_blank'> <button className="btn btn-circle bg-teal-500 btn-outline">GH</button></a>
+                     
                             </div>
                         </div>
                     </div>

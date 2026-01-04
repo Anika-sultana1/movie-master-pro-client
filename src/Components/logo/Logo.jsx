@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const Logo = () => {
     return (
-        <div className="md:ml-50 w-[200px] flex items-center gap-2 text-xl font-semibold">
+        <div className=" w-[200px] flex items-center gap-2 text-xl font-semibold">
 <Link to='/'>
         <PiFilmSlateFill className="text-teal-500 text-2xl" /></Link>
        <Link to='/'>

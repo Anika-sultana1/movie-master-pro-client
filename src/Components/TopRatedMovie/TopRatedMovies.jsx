@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import useAxios from '../../Hooks/useAxios';
 import { Link } from 'react-router';
+import { FaStar } from 'react-icons/fa';
 
 const TopRatedMovies = () => {
   const axios = useAxios();
@@ -18,16 +19,21 @@ const TopRatedMovies = () => {
   }, [axios]);
 
   return (
-    <div className="p-4 bg-gray-100">
-      <h2 className="text-2xl font-bold mb-4 text-center my-10">Top Rated Movies</h2>
+    <div className="p-6  bg-gray-100">
+      <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-700">
+        <span className="inline-block mt-10 bg-gradient-to-r from-teal-400 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg">
+          Top Rated Movies
+        </span>
+      </h2>
+
       <Swiper
         modules={[Pagination, Navigation, Autoplay]}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true
         }}
-        spaceBetween={20}
+        spaceBetween={24}
         slidesPerView={1}
         navigation
         breakpoints={{
@@ -39,19 +45,31 @@ const TopRatedMovies = () => {
       >
         {movies.map(movie => (
           <SwiperSlide key={movie._id}>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="h-[180px] bg-gray-300 flex items-center justify-center">
-                <img src={movie.posterUrl} alt={movie.title} className="object-cover h-full w-full" />
+            <div className="bg-white h-[400px] rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer">
+              <div className="relative h-[220px]">
+                <img 
+                  src={movie.posterUrl} 
+                  alt={movie.title} 
+                  className="object-cover h-full w-full rounded-t-2xl transition-transform duration-500 hover:scale-110" 
+                />
+                <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white font-semibold text-lg">
+                  {movie.title}
+                </div>
               </div>
+
               <div className="p-4">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold">{movie.title}</h3>
-                  <span className="bg-yellow-400 text-black text-sm font-semibold px-2 py-1 rounded">
-                    Ratings: {movie.rating}
+                  <h3 className="text-lg font-bold text-gray-800">{movie.title}</h3>
+                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow">
+                    <FaStar></FaStar> {movie.rating || "N/A"}
                   </span>
                 </div>
-                <p className="text-sm text-gray-700 line-clamp-3 mb-3">{movie.plotSummary}</p>
-                <Link to={`/movies/${movie._id}`}><button className="btn btn-primary w-full">View Movie Details</button></Link>
+                <p className="text-sm text-gray-600 line-clamp-3 mb-4">{movie.plotSummary}</p>
+                <Link to={`/movies/${movie._id}`}>
+                  <button className="w-full py-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg shadow transition-all">
+                    View Movie Details
+                  </button>
+                </Link>
               </div>
             </div>
           </SwiperSlide>

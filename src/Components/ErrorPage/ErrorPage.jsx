@@ -1,24 +1,67 @@
 import React from 'react';
-import error404 from '../../assets/error-404.png'
 import { useNavigate } from 'react-router';
+import { motion } from 'framer-motion';
+import error404 from '../../assets/error-404.png';
 
 const ErrorPage = () => {
+  const navigate = useNavigate();
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
-    const navigate = useNavigate();
-    const handleGoBack = ()=>{
-        navigate(-1)
-    }
+  return (
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-300 px-4">
+      
+      {/* Animated Image */}
+      <motion.img
+        src={error404}
+        alt="404 Error"
+        className="w-64 sm:w-96 h-64 sm:h-96 object-contain mb-6"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 120, damping: 10 }}
+      />
 
+      {/* Animated Heading */}
+      <motion.h1
+        className="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2 text-center"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        Oops! Page Not Found
+      </motion.h1>
 
-    return (
-        <div className='flex flex-col justify-center items-center my-10'>
-            <img className='w-[400px] h-[400px]' src={error404} alt="" />
-            <h1 className='font-bold text-2xl my-5'>Oops, page not found!</h1>
-            <p className='text-[#627382]'>The page you are looking for is not available.</p>
-            <button onClick={handleGoBack} className='bg-linear-to-r from-[#632EE3] to-[#9F62F2] p-2 px-4 rounded-[5px] text-white mt-2'>Go Back!</button>
-        </div>
-    );
+      {/* Subtext */}
+      <motion.p
+        className="text-gray-600 mb-6 text-center max-w-md"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+      </motion.p>
+
+      {/* Go Back Button */}
+      <motion.button
+        onClick={handleGoBack}
+        className="px-6 py-3 bg-gradient-to-r from-teal-400 to-blue-500 text-white rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Go Back
+      </motion.button>
+
+      {/* Optional: small decorative dots or shapes */}
+      <div className="absolute bottom-10 flex gap-2">
+        <span className="w-2 h-2 bg-teal-400 rounded-full animate-ping"></span>
+        <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping delay-200"></span>
+        <span className="w-2 h-2 bg-purple-500 rounded-full animate-ping delay-400"></span>
+      </div>
+
+    </div>
+  );
 };
 
 export default ErrorPage;

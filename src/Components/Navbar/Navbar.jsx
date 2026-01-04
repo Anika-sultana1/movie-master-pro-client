@@ -21,6 +21,7 @@ const Navbar = ({ setActiveSection, activeSection }) => {
   const navigate = useNavigate();
   const location = useLocation(); 
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || 'light');
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -109,9 +110,9 @@ const publicLinks = (
       <NavLink to="/contact" className={navItemClass}><RiContactsLine /> Contact</NavLink>
       <NavLink to="/privacy-policy" className={navItemClass}><MdOutlinePrivacyTip /> Privacy Policy</NavLink>
       <NavLink to="/cookies" className={navItemClass}><BiCookie /> Cookie Policy</NavLink>
-      <NavLink to="/blogs" className={navItemClass}><BiCookie /> Blog</NavLink>
-      <NavLink to="/testimonial" className={navItemClass}><BiCookie /> Testimonial</NavLink>
-      <NavLink to="/news-letter" className={navItemClass}><BiCookie /> News Letter</NavLink>
+      <NavLink to="/blogs" className={navItemClass}><GrBlog /> Blog</NavLink>
+      <NavLink to="/testimonial" className={navItemClass}><GoCodeReview /> Testimonial</NavLink>
+      <NavLink to="/news-letter" className={navItemClass}><AiOutlineMail />News Letter</NavLink>
       <NavLink to="/services" className={navItemClass}><MdOutlineHomeRepairService /> Services</NavLink>
     </>
   );
@@ -136,6 +137,16 @@ const scrollLinks = [
   { id: "testimonial", label: "Testimonial", icon:<GoCodeReview />},
   { id: "about", label: "About", icon:<MdOutlineRoundaboutLeft /> },
 ];
+
+
+const handleSearch = (e) => {
+  e.preventDefault();
+  if (!searchQuery.trim()) return;
+  
+
+  console.log("Searching for:", searchQuery);
+  navigate(`/allMovies?search=${searchQuery}`);
+};
 
   return (
     <div className="navbar fixed top-0 left-0 right-0 z-50 bg-gray-300 shadow-md border-b border-gray-200 px-6 lg:px-8">
@@ -194,8 +205,15 @@ const scrollLinks = [
       <div className="navbar-end flex items-center gap-4">
         {user ? (
           <>
-            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-40 lg:w-52" />
-            <motion.div
+        <form onSubmit={handleSearch}>
+              <input 
+    type="text" 
+    placeholder="Search movies..." 
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    className="input input-bordered w-24 md:w-40 lg:w-52 h-10 transition-all focus:w-32 md:focus:w-60" 
+  />
+      </form>      <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4 }}

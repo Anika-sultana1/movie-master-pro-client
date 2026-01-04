@@ -27,7 +27,7 @@ const fadeInUp = {
 const Home = () => {
   return (
     <div className="bg-gray-100">
-
+<title>MOVIEMASTERpro | Home</title>
       <motion.div id="banner" initial="hidden" animate="visible" variants={fadeInUp}>
         <Banner />
       </motion.div>

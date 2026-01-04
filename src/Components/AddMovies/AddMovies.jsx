@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-// import useAuth from '../../Hooks/useAuth';
 import {  useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { toast, ToastContainer } from 'react-toastify';
 import bgImage from '../../assets/forest-golden-hour-time.jpg'
 import FullScreenLoader from '../FullScreenLoader';
 
-const AddMovie = () => {
+const AddMovies = () => {
     const axios = useAxiosSecure();
-    // const { user } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -33,11 +31,11 @@ const newMovie = {
 
 
 axios.post('/movies/add', newMovie)
-.then(result=> {
-    console.log(result.data)
+.then(()=> {
+  
     toast.success('Your movie Added Succusfully')
     setLoading(false)
-    navigate('/allMovies')
+    navigate('/myCollection')
 })
 .catch(error => {
     console.log(error)
@@ -58,6 +56,7 @@ setLoading(false)
         <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-24 py-10"
           style={{ backgroundImage: `url(${bgImage})` }}
           >
+            <title>MovieMASTERpro | Add Movies</title>
         
             <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-3xl">
                 <h1 className="text-3xl text-gray-600 font-bold mb-6">Add New Movie</h1>
@@ -95,4 +94,4 @@ setLoading(false)
     );
 };
 
-export default AddMovie;
+export default AddMovies;

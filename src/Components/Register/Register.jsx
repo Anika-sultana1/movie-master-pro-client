@@ -84,6 +84,7 @@ const Register = () => {
       className="min-h-screen pt-16 flex items-center justify-center bg-cover bg-center relative"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+      <title>MOVIEMASTERpro | Sign Up</title>
       <div className="absolute inset-0 bg-black/60" />
 
       {loading && <FullScreenLoader />}

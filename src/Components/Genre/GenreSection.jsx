@@ -40,7 +40,6 @@ useEffect( ()=>
   staticGenres.forEach((genre)=>{
     axios.get(`/movies/filter?genre=${genre.name}`)
     .then(res => {
-      console.log(res.data)
       counts[genre.name]= res.data.length
       setMovieCounts({...counts})
     })

@@ -66,7 +66,7 @@ const UserDashboard = () => {
             Swal.fire("Deleted!", "Movie has been removed.", "success");
           }
         } catch (err) {
-          Swal.fire("Error!", "Something went wrong while deleting.", "error");
+          Swal.fire("Error!", "Something went wrong while deleting.",err);
         }
       }
     });
@@ -88,7 +88,7 @@ const UserDashboard = () => {
     >
       <div className="max-w-7xl mx-auto">
         
-
+<title>MOVIEMASTERpro | Dashboard</title>
         <motion.header 
           initial={{ y: -50 }} animate={{ y: 0 }}
           className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 bg-base-200/50 p-6 rounded-[2.5rem] border border-base-300 backdrop-blur-md shadow-sm"

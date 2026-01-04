@@ -22,13 +22,17 @@ const Watchlist = () => {
     const fetchWatchlist = async () => {
       try {
         setLoading(true);
+ 
         const watchlistResult = await axiosSecure.get("/watchlist");
-        const movieIds = watchlistResult.data.map(item => item.movieId);
+   
+        const watchlistItems = watchlistResult.data;
 
-        // Promise.all ব্যবহার করা হয়েছে দ্রুত ডেটা ফেচ করার জন্য
-        const movieRequests = movieIds.map(id => axios.get(`/movies/${id}`));
+        const movieRequests = watchlistItems.map(item => axios.get(`/movies/${item.movieId}`));
         const responses = await Promise.all(movieRequests);
-        const moviesData = responses.map(res => res.data);
+        const moviesData = responses.map((res, idx) => ({
+          ...res.data,
+          watchlistId: watchlistItems[idx]._id, 
+        }));
 
         setMovies(moviesData);
       } catch (error) {
@@ -42,7 +46,7 @@ const Watchlist = () => {
     fetchWatchlist();
   }, [axios, axiosSecure, user]);
 
-  const handleDelete = (id) => {
+  const handleDelete = (watchlistId) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -55,10 +59,10 @@ const Watchlist = () => {
       color: '#fff'
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/watchlist/${id}`)
+        axiosSecure.delete(`/watchlist/${watchlistId}`)
           .then(res => {
             if (res.data.deletedCount > 0) {
-              setMovies(movies.filter(movie => movie._id !== id));
+              setMovies(movies.filter(movie => movie.watchlistId !== watchlistId));
               toast.success("Removed from Watchlist");
             }
           })
@@ -77,7 +81,7 @@ const Watchlist = () => {
 
   return (
     <div className="min-h-screen bg-base-300 pb-20 pt-28 px-4 md:px-10 lg:px-32">
-      {/* Header Section */}
+      <title>MOVIEMASTERpro | Watchlist</title>
       <div className="max-w-6xl mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h2 className="text-5xl font-black text-white tracking-tight">
@@ -89,7 +93,7 @@ const Watchlist = () => {
       </div>
 
       {loading ? (
-        <FullScreenLoader></FullScreenLoader>
+        <FullScreenLoader />
       ) : movies.length === 0 ? (
         <div className="text-center bg-base-200 p-20 rounded-3xl border-2 border-dashed border-gray-700">
           <h3 className="text-2xl text-gray-500 font-semibold">Your watchlist is empty!</h3>
@@ -100,14 +104,13 @@ const Watchlist = () => {
           <AnimatePresence>
             {movies.map((movie) => (
               <motion.div
-                key={movie._id}
+                key={movie.watchlistId}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 layout
                 className="card card-side bg-base-100 shadow-2xl overflow-hidden group border border-white/5"
               >
-                {/* Image Section with Overlay */}
                 <figure className="relative w-1/3 md:w-56 overflow-hidden">
                   <img
                     src={movie.posterUrl}
@@ -119,7 +122,6 @@ const Watchlist = () => {
                   </div>
                 </figure>
 
-                {/* Content Section */}
                 <div className="card-body p-6 w-2/3">
                   <div className="flex justify-between items-start">
                     <div>
@@ -132,10 +134,9 @@ const Watchlist = () => {
                         <div className="badge badge-outline badge-sm uppercase tracking-wider">{movie.genre}</div>
                       </div>
                     </div>
-                    
-                    {/* Delete Button (Desktop) */}
+
                     <button 
-                      onClick={() => handleDelete(movie._id)}
+                      onClick={() => handleDelete(movie.watchlistId)}
                       className="btn btn-circle btn-ghost text-error hover:bg-error/20 hidden md:flex"
                       title="Remove from watchlist"
                     >
@@ -151,10 +152,8 @@ const Watchlist = () => {
                     <Link to={`/movies/${movie._id}`} className="btn btn-primary btn-sm md:btn-md rounded-lg shadow-lg shadow-primary/20">
                       View Details
                     </Link>
-                    
-                    {/* Delete Button (Mobile) */}
                     <button 
-                      onClick={() => handleDelete(movie._id)}
+                      onClick={() => handleDelete(movie.watchlistId)}
                       className="btn btn-error btn-outline btn-sm md:hidden"
                     >
                       <FaTrashAlt />

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import useAxios from '../../Hooks/useAxios';
 import { Link, useParams } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
-import bgImage from '../../assets/backround.jpeg'
+import bgImage from '../../assets/body-bg.jpg'
 import { FiYoutube } from "react-icons/fi";
 
 import { FaEdit, FaStar, FaTrashAlt, } from 'react-icons/fa';
 import FullScreenLoader from '../FullScreenLoader';
+import Swal from 'sweetalert2';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ViewDetails = () => {
     const axios = useAxios();
@@ -28,6 +30,38 @@ const ViewDetails = () => {
                 setLoading(false);
             });
     }, [axios, id]);
+
+const handleDelete = (movieId) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Are you sure to delte this permenently!!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+          setLoading(true)
+      axios.delete(`/movies/${movieId}`)
+        .then(res => {
+        
+          if (res.data.deletedCount) {
+            setDetails(details.filter(d => d._id !== movieId))
+            toast.success('Movie deleted successfully')
+              setLoading(false)
+          }
+        })
+        .catch(error => {
+          setLoading(false)
+          console.log(error)
+          toast.error('Delete failed')
+        })
+         
+    }
+  });
+}
+
 
     if (loading) {
         return (
@@ -52,18 +86,19 @@ const ViewDetails = () => {
 
     return (
 <div>
+    <ToastContainer></ToastContainer>
+    <title>MOVIEMASTERpro |Details</title>
             <div className="relative  min-h-screen rounded-xl overflow-hidden shadow-lg">
-  {/* Background Image */}
+
   <img
     src={bgImage}
     alt="Movie Poster"
     className="w-[1450px] h-[700px] object-cover"
   />
 
-  {/* Overlay for better text readability */}
+
   <div className="absolute inset-0 bg-black/40"></div>
 
-  {/* Text Content */}
   <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
     <h2 className="text-white text-4xl font-bold mb-2">
       Movies Page
@@ -168,11 +203,14 @@ const ViewDetails = () => {
 
                     {isOwner && (
                         <div className="mt-4 flex gap-3">
-                            <button className="btn btn-primary shadow-lg hover:shadow-xl transition duration-200">
+                            <Link to={`/movies/update/${details._id}`}>
+                             <button className="btn btn-primary shadow-lg hover:shadow-xl transition duration-200">
                                 <FaEdit className="mr-1" />
                                 Edit Movie
                             </button>
-                            <button className="btn btn-error text-white shadow-lg hover:shadow-xl transition duration-200">
+                            </Link>
+                           
+                            <button onClick={()=>handleDelete(details._id)} className="btn btn-error text-white shadow-lg hover:shadow-xl transition duration-200">
                                 <FaTrashAlt className="mr-1" />
                                 Delete Movie
                             </button>

@@ -42,6 +42,7 @@ const Blog = () => {
 
     return (
         <div className="min-h-screen bg-base-100 py-12 px-4 md:px-12 lg:px-24 pt-24">
+            <title>MOVIEMASTERpro | </title>
             <div className="max-w-7xl mx-auto">
                 
               

@@ -7,7 +7,6 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ViewDetails from "../ViewDetails/ViewDetails";
-import AddMovie from "../AddMovies/AddMovies";
 import UpdateMovieDetails from "../UpdateMovieDetails/UpdateMovieDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import Watchlist from "../AllMovies/Watchlist";
@@ -20,6 +19,12 @@ import Cookie from "../ExtraSections/Cookie";
 import Testimonial from "../ExtraSections/Testimonial";
 import NewsLetter from "../ExtraSections/NewsLetter";
 import DashboardHome from "../dashboard/DashboardHome";
+import ProfileSettings from "../ProfileSettings";
+import MovieManagement from "../MovieManagement";
+import DashboardLayout from "../dashboard/DashboardLayout";
+import MyMovies from "../myMovies/MyMovies";
+import AdminRoutes from "./AdminRoutes";
+import AddMovies from "../AddMovies/AddMovies";
 
 
 
@@ -48,7 +53,7 @@ export const router = createBrowserRouter([
         },
         {
             path: '/privacy-policy',
-            Component: PrivacyPollicy,
+            element: <PrivateRoutes><PrivacyPollicy></PrivacyPollicy></PrivateRoutes>,
         },
         {
             path: '/about',
@@ -68,7 +73,7 @@ export const router = createBrowserRouter([
         },
         {
             path: '/cookies',
-            Component: Cookie,
+            element: <PrivateRoutes><Cookie></Cookie></PrivateRoutes>,
         },
         {
             path: '/myCollection',
@@ -80,11 +85,11 @@ export const router = createBrowserRouter([
         },
         {
             path: '/movies/update/:id',
-            Component: UpdateMovieDetails,
+            element: <PrivateRoutes><UpdateMovieDetails></UpdateMovieDetails></PrivateRoutes>,
         },
         {
             path: '/movies/add',
-            Component: AddMovie,
+            element:<PrivateRoutes><AddMovies></AddMovies></PrivateRoutes>,
         },
         {
             path: '/movies/:id',
@@ -103,6 +108,25 @@ export const router = createBrowserRouter([
   {
     
     path: 'dashboard',
-    element: <DashboardHome></DashboardHome>
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+        {
+            index:true,
+            element:<DashboardHome></DashboardHome>,
+        }
+        ,
+        {
+            path: '/dashboard/profile-settings',
+            element: <PrivateRoutes><ProfileSettings></ProfileSettings></PrivateRoutes>
+        },
+        {
+            path: '/dashboard/my-movies',
+            element: <PrivateRoutes><MyMovies></MyMovies></PrivateRoutes>
+        },
+        {
+            path: '/dashboard/movie-management',
+            element: <AdminRoutes><MovieManagement></MovieManagement></AdminRoutes>
+        }
+    ]
   }
 ]);

@@ -19,7 +19,7 @@ useEffect( ()=>{
 setLoading(true)
 axios.get(`/movies/my-collection?email=${user?.email}`)
 .then(result => {
-    console.log(result.data)
+ 
     setMyCollections(result.data)
     setLoading(false)
 })
@@ -67,6 +67,7 @@ const handleDelete = (movieId) => {
 
 
         <div className='pt-24'>
+          <title>MOVIEMASTERpro | My Movies</title>
             <h1 className='font-bold text-4xl text-center my-5'>My Collections</h1>
 
   <div>
