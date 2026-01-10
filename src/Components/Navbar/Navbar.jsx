@@ -14,6 +14,7 @@ import { GrBlog } from "react-icons/gr";
 import { IoStatsChartOutline } from "react-icons/io5";
 import { GoCodeReview } from "react-icons/go";
 import { AiOutlineMail } from "react-icons/ai";
+import Logo from '../logo/Logo';
 
 
 const Navbar = ({ setActiveSection, activeSection }) => {
@@ -40,18 +41,21 @@ const Navbar = ({ setActiveSection, activeSection }) => {
   };
 
   const navItemClass = ({ isActive }) =>
-    `flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300
+    `flex items-center gap-2 px-3 py-2 rounded-2xl transition-all duration-300
      ${isActive
-       ? "bg-teal-500 text-white shadow-md scale-[1.03]"
-       : "text-gray-700 hover:bg-teal-100 hover:text-teal-700"
+       ? "bg-primary hover:bg-primary-100 text-white shadow-md scale-[1.03]"
+       : " text-highlight hover:bg-primary "
      }`;
 
-  const scrollItemClass = (id) =>
-    `flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300
-     ${activeSection === id
-       ? "bg-teal-300 text-white shadow-md scale-[1.03]"
-       : "text-gray-700 hover:bg-teal-100 hover:text-teal-700"
-     }`;
+const scrollItemClass = (id) => `
+  flex items-center gap-2 px-3 py-2 rounded-2xl transition-all duration-300
+  ${activeSection === id
+    ? "bg-primary text-white shadow-md scale-[1.03] pointer-events-none"
+    : "text-black bg-primary-100 hover:bg-primary hover:text-white"
+  }
+`;
+
+
 
   const handleScroll = (id) => {
     if (location.pathname !== '/') {
@@ -66,43 +70,11 @@ const Navbar = ({ setActiveSection, activeSection }) => {
     }
   };
 
-const publicLinks = (
-  <>
-    {/* Home */}
-    <NavLink
-      to="/"
-      className={`${navItemClass} relative group text-2xl`}
-    >
-      <CiHome />
+const publicLinks = [
+  { to: "/", label: "Home", icon: <CiHome /> },
+  { to: "/allMovies", label: "All Movies", icon: <BiMoviePlay /> },
+];
 
-      {/* Tooltip */}
-      <span
-        className="absolute -bottom-10 left-1/2 -translate-x-1/2
-        scale-0 group-hover:scale-100 transition-transform
-        bg-black text-white text-xs px-3 py-1 rounded-md whitespace-nowrap"
-      >
-        Home
-      </span>
-    </NavLink>
-
-    {/* All Movies */}
-    <NavLink
-      to="/allMovies"
-      className={`${navItemClass} relative group text-2xl`}
-    >
-      <BiMoviePlay />
-
-      {/* Tooltip */}
-      <span
-        className="absolute -bottom-10 left-1/2 -translate-x-1/2
-        scale-0 group-hover:scale-100 transition-transform
-        bg-black text-white text-xs px-3 py-1 rounded-md whitespace-nowrap"
-      >
-        All Movies
-      </span>
-    </NavLink>
-  </>
-);
 
   const defaultLinks = (
     <>
@@ -149,55 +121,89 @@ const handleSearch = (e) => {
 };
 
   return (
-    <div className="navbar fixed top-0 left-0 right-0 z-50 bg-gray-300 shadow-md border-b border-gray-200 px-6 lg:px-8">
+    <div className="navbar fixed top-0 left-0 right-0 z-50  shadow-md  px-6 lg:px-8">
 
       <div className="navbar-start flex items-center gap-4">
 
         <div className="dropdown">
-          <div tabIndex={0} className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} className="btn bg-primary lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
               viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round"
                 strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </div>
-          <ul className="menu menu-sm dropdown-content bg-base-100 rounded-xl mt-3 w-56 p-3 shadow-xl gap-1">
-            {publicLinks}
-            {user ? userLinks : defaultLinks }
-          </ul>
+     <ul className="menu menu-sm dropdown-content bg-secondary rounded-2xl mt-3 w-56 p-3 shadow-xl gap-1">
+  {publicLinks.map(link => (
+    <NavLink key={link.to} to={link.to} className={navItemClass}>
+      {link.icon}
+      {link.label}
+    </NavLink>
+  ))}
+  {user ? userLinks : defaultLinks}
+</ul>
+
         </div>
 
 
+
       <div className="hidden md:flex items-center gap-2">
-  <PiFilmSlateFill className="text-teal-500 text-3xl animate-pulse" />
-  <span className="font-extrabold text-xl lg:text-2xl text-gray-900 hover:text-teal-600 transition-all">
-    Movie Master Pro
-  </span>
+<Logo></Logo>
 </div>
 
       </div>
 
 <div className="navbar-center hidden lg:flex">
-  <ul className="menu menu-horizontal px-1 gap-2">
-    {publicLinks}
-    {user ? userLinks : scrollLinks.map(link => (
-      <li key={link.id} className="relative group">
-        <button
-          onClick={() => handleScroll(link.id)}
-          className={scrollItemClass(link.id)}
-        >
-          <span className={`${activeSection === link.id ? 'text-teal-500' : 'text-gray-500'} text-xl`}>
-            {link.icon}
-          </span>
-        </button>
-
-    
-        <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">
+<ul className="menu menu-horizontal px-1 gap-2">
+  {publicLinks.map(link => (
+    <li key={link.to} className="relative group">
+      {user ? (
+     
+        <NavLink to={link.to} className={navItemClass}>
+          {link.icon}
           {link.label}
-        </span>
-      </li>
-    ))}
-  </ul>
+        </NavLink>
+      ) : (
+        
+        <NavLink
+          to={link.to}
+          className="text-2xl text-gray-700 hover:text-teal-600"
+        >
+          {link.icon}
+
+          <span
+            className="absolute -bottom-10 left-1/2 -translate-x-1/2
+            scale-0 group-hover:scale-100 transition-transform
+            bg-black text-white text-xs px-3 py-1 rounded-2xl whitespace-nowrap"
+          >
+            {link.label}
+          </span>
+        </NavLink>
+      )}
+    </li>
+  ))}
+
+  {user
+    ? userLinks
+    : scrollLinks.map(link => (
+        <li key={link.id} className="relative group">
+          <button
+            onClick={() => handleScroll(link.id)}
+            className={scrollItemClass(link.id)}
+          >
+            <span className={`${activeSection === link.id ? 'bg-primary' : 'bg-primary-100'} text-xl`}>
+              {link.icon}
+            </span>
+          </button>
+
+          <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs text-white bg-gray-800 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50">
+            {link.label}
+          </span>
+        </li>
+      ))}
+</ul>
+
+
 </div>
 
 
@@ -223,7 +229,7 @@ const handleSearch = (e) => {
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0px 0px 10px rgba(45,212,191,0.6)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-teal-500 text-white font-medium rounded-lg shadow-md hover:bg-teal-600 transition-all"
+                  className="flex items-center gap-2 px-4 py-2 bg-primary text-white font-medium rounded-2xl shadow-md transition-all"
                 >
                   <FaPlus className="text-white" />
                 </motion.button>
@@ -232,22 +238,25 @@ const handleSearch = (e) => {
 
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
+                <div className="w-10 rounded--2xl">
                   <img alt="User avatar" src={user?.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"} />
                 </div>
               </div>
-              <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
+              <ul tabIndex="-1" className="menu menu-sm dropdown-content bg-secondary rounded-box mt-3 w-52 p-2 shadow">
                 <li><a>{user?.displayName}</a></li>
-                <li className='cursor-pointer' onClick={handleToggle}>
+                <li className='cursor-pointer m-3 hover:text-secondary text-highlight' onClick={handleToggle}>
                   {theme === "light" ? " Light" : " Dark"}
                 </li>
-                {defaultLinks}
+              <li className='my-1 border-t border-gray-200'>  {defaultLinks}</li>
                 <li className='text-red-500' onClick={handleLogOut}><a><CiLogout /> Logout</a></li>
               </ul>
             </div>
           </>
         ) : (
           <div className='navbar-end'>
+             <li className='cursor-pointer text-highlight m-2' onClick={handleToggle}>
+                  {theme === "light" ? " Dark" : " Light"}
+                </li>
             <button className='btn btn-primary'>
               <Link to='/login'>Login</Link> / <Link to='/register'>Register</Link>
             </button>

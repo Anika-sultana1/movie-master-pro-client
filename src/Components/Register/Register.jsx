@@ -78,6 +78,7 @@ const Register = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div
@@ -85,7 +86,7 @@ const Register = () => {
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <title>MOVIEMASTERpro | Sign Up</title>
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0" />
 
       {loading && <FullScreenLoader />}
 
@@ -93,14 +94,14 @@ const Register = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative z-10 w-[380px] mt-8 mb-8 rounded-[24px] bg-black/85 backdrop-blur-xl p-6 text-white shadow-2xl"
+        className="relative z-10 w-[380px] mt-8 mb-8 rounded-2xl  backdrop-blur-xl p-6 text-white shadow-2xl"
       >
         {/* Header */}
         <div className="relative text-center mb-6">
-          <h1 className="text-3xl font-semibold tracking-wide">
+          <h1 className="text-highlight text-3xl font-semibold tracking-wide">
             Movie Master Pro
           </h1>
-          <span className="absolute right-6 top-0 text-[10px] bg-emerald-300 text-black px-2 py-0.5 rounded-full">
+          <span className="absolute right-6 top-0 text-[10px] bg-emerald-300 text-black px-2 py-0.5 rounded-2xl">
             BETA
           </span>
           <p className="text-gray-400 text-sm mt-2">

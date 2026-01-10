@@ -134,14 +134,14 @@ if (res.data.deletedCount > 0) {
   return (
     <div className="min-h-screen pt-28 p-6">
       <title>Dashboard | Movie Management</title>
-      <div className="max-w-6xl mx-auto bg-base-200 rounded-3xl p-8">
+      <div className="max-w-6xl mx-auto bg-secondary rounded-2xl p-8">
         <h2 className="text-3xl font-black mb-6 text-teal-600">
           Movie Management
         </h2>
 
-        <div className="bg-base-200 rounded-[3rem] p-8 border border-base-300">
+        <div className="bg-secondary rounded-2xl p-8 border border-base-300">
           <h3 className="text-2xl font-black mb-6 flex items-center gap-3">
-            <HiOutlineFilm className="text-teal-500" /> Global Content Management
+            <HiOutlineFilm className="text-highlight" /> Global Content Management
           </h3>
           <div className="overflow-x-auto">
             <table className="table w-full border-separate border-spacing-y-3">
@@ -156,7 +156,7 @@ if (res.data.deletedCount > 0) {
               </thead>
               <tbody>
                 {movies.map((movie) => (
-                  <tr key={movie._id} className="bg-base-100 shadow-sm">
+                  <tr key={movie._id} className="bg-secondary shadow-sm">
                     <td className="font-bold rounded-l-2xl">{movie.title}</td>
                     <td className="text-xs opacity-70">{movie.addedBy}</td>
                     <td className="text-amber-500 font-bold">
@@ -177,7 +177,7 @@ if (res.data.deletedCount > 0) {
                         {/* Approve Button */}
                         <button
                           onClick={() => handleApproveMovies(movie._id)}
-                          className="btn btn-sm btn-circle btn-ghost text-success hover:bg-success/10"
+                          className="btn btn-sm  btn-ghost  hover:bg-success/10"
                           title="Approve"
                           disabled={movie.status === 'approved'}
                         >
@@ -187,7 +187,7 @@ if (res.data.deletedCount > 0) {
                         {/* Reject Button */}
                         <button
                           onClick={() => handleRejectMovie(movie._id)}
-                          className="btn btn-sm btn-circle btn-ghost text-warning hover:bg-warning/10"
+                          className="btn btn-sm  btn-ghost hover:bg-warning/10"
                           title="Reject"
                           disabled={movie.status === 'rejected'}
                         >
@@ -197,7 +197,7 @@ if (res.data.deletedCount > 0) {
                         {/* Remove/Delete Button */}
                         <button
                           onClick={() => handleRemoveMovie(movie._id)}
-                          className="btn btn-sm btn-circle btn-ghost text-error hover:bg-error/10"
+                          className="btn btn-sm  btn-ghost  hover:bg-error/10"
                           title="Remove"
                         >
                           <HiOutlineTrash size={22} />

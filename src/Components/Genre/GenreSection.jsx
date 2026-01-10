@@ -68,9 +68,9 @@ useEffect( ()=>
   };
 
   return (
-    <div className="py-20 my-10  text-white rounded-2xl mx-12 shadow-2xl">
+    <div className=" text-white rounded-2xl mx-12 mt-20 md:mt-28 ">
       <h2 className="text-xl font-extrabold mb-12 text-gray-600 flex justify-center items-center gap-4">
-        <FcSearch /> Browse By Genre
+        <FcSearch /> Browse <span className='text-highlight'>Movies</span> By Genre
       </h2>
 
       <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto px-4">
@@ -85,7 +85,7 @@ useEffect( ()=>
             whileTap={{ scale: 0.95 }}
             onClick={() => handleGenreClick(genre.name)}
             className="flex items-center justify-center gap-4
-                       p-3 px-5 rounded-4xl bg-gray-800 text-lg font-semibold 
+                       p-3 px-5 rounded-2xl bg-primary text-lg font-semibold 
                        hover:bg-teal-600 transition duration-300 ease-in-out
                        shadow-lg"
           >

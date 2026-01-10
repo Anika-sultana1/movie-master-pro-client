@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import FullScreenLoader from "../FullScreenLoader";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 const AllMovies = () => {
   const axios = useAxios();
@@ -78,7 +79,7 @@ const AllMovies = () => {
       <ToastContainer />
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-10 text-gray-700">
-          Explore <span className="text-teal-400">Movies</span>
+          Explore <span className="text-primary">Movies</span>
         </h2>
 
         {/* Filters */}
@@ -88,30 +89,30 @@ const AllMovies = () => {
             placeholder="Search..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border p-2 rounded flex-1"
+            className="border p-2 rounded-2xl flex-1"
           />
           <input
             type="text"
             placeholder="Genre (comma separated)"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-            className="border p-2 rounded flex-1"
+            className="border p-2 rounded-2xl flex-1"
           />
           <input
             type="number"
             placeholder="Min Rating"
             value={minRating}
             onChange={(e) => setMinRating(e.target.value)}
-            className="border p-2 rounded w-28"
+            className="border p-2 rounded-2xl w-28"
           />
           <input
             type="number"
             placeholder="Max Rating"
             value={maxRating}
             onChange={(e) => setMaxRating(e.target.value)}
-            className="border p-2 rounded w-28"
+            className="border p-2 rounded-2xl w-28"
           />
-          <select value={sort} onChange={(e) => setSort(e.target.value)} className="border p-2 rounded">
+          <select value={sort} onChange={(e) => setSort(e.target.value)} className="border p-2 rounded-2xl">
             <option value="addedAt_desc">Newest</option>
             <option value="addedAt_asc">Oldest</option>
             <option value="rating_desc">Rating High → Low</option>
@@ -140,9 +141,10 @@ const AllMovies = () => {
                     alt={movie.title}
                     className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>
                   <div className="absolute bottom-0 left-0 p-4 text-white w-full">
-                    <h3 className="text-xl font-bold mb-1">{movie.title}</h3>
+                    <Link to={`/movies/${movie._id}`}>     <h3 className="text-xl font-bold mb-1">{movie.title}</h3></Link>
+               
                     <div className="flex items-center gap-3 text-sm text-gray-300">
                       <span className="flex items-center gap-1">
                         <FaStar className="text-yellow-400" /> {movie.rating || "N/A"}
@@ -157,7 +159,7 @@ const AllMovies = () => {
                     </div>
                      <button
                   onClick={() => handleAddToWatchlist(movie._id)}
-                  className="mt-2 w-full py-1.5 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
+                  className="mt-2 w-full py-1.5 bg-primary-200 text-white rounded-2xl hover:bg-primary-600 transition"
                 >
                   Add to Watchlist
                 </button>
@@ -172,7 +174,7 @@ const AllMovies = () => {
                 <button
                   onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                   disabled={page === 1}
-                  className="px-4 py-2 border rounded disabled:opacity-50"
+                  className="px-4 py-2 border rounded-2xl disabled:opacity-50"
                 >
                   Prev
                 </button>
@@ -182,7 +184,7 @@ const AllMovies = () => {
                 <button
                   onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
                   disabled={page === totalPages}
-                  className="px-4 py-2 border rounded disabled:opacity-50"
+                  className="px-4 py-2 border rounded-2xl disabled:opacity-50"
                 >
                   Next
                 </button>

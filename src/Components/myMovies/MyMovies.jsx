@@ -93,25 +93,25 @@ const MyMovies = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 md:p-8 bg-[#f8fafc] min-h-screen">
+    <div className="max-w-5xl mx-auto p-4 md:p-8 bg-secondary min-h-screen">
 <title>MOVIEMASTERpro | My Movies/approved</title>
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
-          <h3 className="text-3xl font-extrabold text-slate-800 tracking-tight">
+          <h3 className="text-3xl font-extrabold  tracking-tight">
             My Collection
           </h3>
           <p className="text-slate-500 mt-1">Manage and organize your favorite movies</p>
         </div>
-        <div className="bg-white px-6 py-2 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-2">
-          <FaFilm className="text-indigo-500" />
+        <div className="bg-secondary px-6 py-2 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-2">
+          <FaFilm className="text-highlight" />
           <span className="font-bold text-slate-700">{movies.length} Movies</span>
         </div>
       </div>
 
      
       {movies.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm">
-          <p className="text-slate-400 text-lg italic">Your collection is currently empty.</p>
+        <div className="text-center py-20 bg-secondary rounded-2xl border border-slate-200 shadow-sm">
+          <p className="text-highlight-100 text-lg italic">Your collection is currently empty.</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -126,11 +126,11 @@ const MyMovies = () => {
                   <h4 className="text-xl font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
                     {movie.title}
                   </h4>
-                  <span className="hidden md:block bg-indigo-50 text-indigo-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">
+                  <span className="hidden md:block bg-indigo-50 text-indigo-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded-2xl">
                     HD
                   </span>
                   <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-2xl uppercase ${
                       movie.status === "approved"
                         ? "bg-green-100 text-green-700"
                         : movie.status === "pending"
@@ -179,7 +179,7 @@ const MyMovies = () => {
  
       {editingMovie && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-lg relative">
+          <div className="bg-secondary p-6 rounded-2xl w-full max-w-md shadow-lg relative">
             <h3 className="text-xl font-bold mb-4">Edit Movie</h3>
             <div className="space-y-2">
               <input
@@ -187,67 +187,67 @@ const MyMovies = () => {
                 placeholder="Title"
                 value={editData.title}
                 onChange={(e) => setEditData({ ...editData, title: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <input
                 type="text"
                 placeholder="Genre"
                 value={editData.genre}
                 onChange={(e) => setEditData({ ...editData, genre: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <input
                 type="text"
                 placeholder="Release Year"
                 value={editData.releaseYear}
                 onChange={(e) => setEditData({ ...editData, releaseYear: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <input
                 type="text"
                 placeholder="Director"
                 value={editData.director}
                 onChange={(e) => setEditData({ ...editData, director: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <input
                 type="text"
                 placeholder="Cast"
                 value={editData.cast}
                 onChange={(e) => setEditData({ ...editData, cast: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <input
                 type="text"
                 placeholder="Language"
                 value={editData.language}
                 onChange={(e) => setEditData({ ...editData, language: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <textarea
                 placeholder="Plot Summary"
                 value={editData.plotSummary}
                 onChange={(e) => setEditData({ ...editData, plotSummary: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
               <input
                 type="text"
                 placeholder="Poster URL"
                 value={editData.posterUrl}
                 onChange={(e) => setEditData({ ...editData, posterUrl: e.target.value })}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded-2xl"
               />
             </div>
             <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={() => setEditingMovie(null)}
-                className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+                className="px-4 py-2 rounded-2xl bg-secondary hover:bg-gray-300"
               >
                 Cancel
               </button>
               <button
                 onClick={handleEditSubmit}
-                className="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-600"
+                className="px-4 py-2 rounded-2xl bg-indigo-500 text-white hover:bg-indigo-600"
               >
                 Save
               </button>

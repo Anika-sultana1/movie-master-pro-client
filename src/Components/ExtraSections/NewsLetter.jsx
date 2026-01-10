@@ -15,17 +15,30 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 px-6 ">
+    <section className="pt-20 px-6 ">
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="max-w-6xl mx-auto relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-teal-500 to-teal-700 p-8 md:p-16 text-white shadow-2xl shadow-teal-500/20"
+        className="
+  max-w-6xl 
+  mx-auto 
+  relative 
+  overflow-hidden 
+  rounded-2xl 
+  bg-primary 
+  p-8 
+  md:p-16 
+  text-white 
+  shadow-2xl 
+  shadow-primary/20
+"
+
       >
      
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-black/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-24 -right-24 w-64 h-64 bg-secondary rounded-2xl blur-3xl"></div>
+        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-dark rounded-2xl blur-3xl"></div>
 
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
           
@@ -50,7 +63,7 @@ const Newsletter = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="w-full max-w-md bg-white/10 backdrop-blur-md p-2 rounded-[2rem] border border-white/20"
+            className="w-full max-w-md bg-secondary backdrop-blur-md p-2 rounded-2xl border border-white/20"
           >
             <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
               <input 
@@ -65,7 +78,7 @@ const Newsletter = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="bg-white text-teal-600 font-black px-8 py-4 rounded-2xl flex items-center justify-center gap-2 transition-all hover:bg-teal-50"
+                className="bg-secondary text-teal-600 font-black px-8 py-4 rounded-2xl flex items-center justify-center gap-2 transition-all hover:bg-primary-50"
               >
                 Join Now <IoPaperPlaneOutline className="text-xl" />
               </motion.button>

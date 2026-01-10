@@ -72,7 +72,7 @@ const Watchlist = () => {
   }
 
   if (!user) return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-dark">
       <div className="alert alert-warning w-fit shadow-lg">
         <span>Please login to view your watchlist.</span>
       </div>
@@ -80,7 +80,7 @@ const Watchlist = () => {
   );
 
   return (
-    <div className="min-h-screen bg-base-300 pb-20 pt-28 px-4 md:px-10 lg:px-32">
+    <div className="min-h-screen bg-secondary pb-20 pt-28 px-4 md:px-10 lg:px-32">
       <title>MOVIEMASTERpro | Watchlist</title>
       <div className="max-w-6xl mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
@@ -89,13 +89,13 @@ const Watchlist = () => {
           </h2>
           <p className="text-gray-400 mt-2 italic">You have {movies.length} movies saved to watch later.</p>
         </div>
-        <div className="h-1 w-20 bg-primary rounded-full hidden md:block mb-3"></div>
+      
       </div>
 
       {loading ? (
         <FullScreenLoader />
       ) : movies.length === 0 ? (
-        <div className="text-center bg-base-200 p-20 rounded-3xl border-2 border-dashed border-gray-700">
+        <div className="text-center bg-secondary p-20 rounded-2xl border-2 border-dashed border-gray-700">
           <h3 className="text-2xl text-gray-500 font-semibold">Your watchlist is empty!</h3>
           <Link to="/all-movies" className="btn btn-primary mt-6">Explore Movies</Link>
         </div>
@@ -109,18 +109,22 @@ const Watchlist = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 layout
-                className="card card-side bg-base-100 shadow-2xl overflow-hidden group border border-white/5"
+                className="card card-side bg-secondary shadow-2xl overflow-hidden group border border-white/5"
               >
-                <figure className="relative w-1/3 md:w-56 overflow-hidden">
-                  <img
-                    src={movie.posterUrl}
-                    alt={movie.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <FaPlayCircle className="text-white text-5xl" />
-                  </div>
-                </figure>
+              <figure className="relative w-40 sm:w-48 md:w-56 flex-shrink-0">
+  <div className="w-full h-full aspect-[2/3] overflow-hidden">
+    <img
+      src={movie.posterUrl}
+      alt={movie.title}
+      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+    />
+  </div>
+
+  <div className="absolute inset-0 bg-dark opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+    <FaPlayCircle className="text-white text-5xl" />
+  </div>
+</figure>
+
 
                 <div className="card-body p-6 w-2/3">
                   <div className="flex justify-between items-start">
@@ -137,7 +141,7 @@ const Watchlist = () => {
 
                     <button 
                       onClick={() => handleDelete(movie.watchlistId)}
-                      className="btn btn-circle btn-ghost text-error hover:bg-error/20 hidden md:flex"
+                      className=" btn-circle btn-ghost text-error hover:bg-error/20 hidden md:flex"
                       title="Remove from watchlist"
                     >
                       <FaTrashAlt size={20} />
@@ -149,7 +153,7 @@ const Watchlist = () => {
                   </p>
 
                   <div className="card-actions justify-end mt-6 items-center gap-4">
-                    <Link to={`/movies/${movie._id}`} className="btn btn-primary btn-sm md:btn-md rounded-lg shadow-lg shadow-primary/20">
+                    <Link to={`/movies/${movie._id}`} className="btn btn-primary btn-sm md:btn-md rounded-2xl shadow-lg shadow-primary/20">
                       View Details
                     </Link>
                     <button 

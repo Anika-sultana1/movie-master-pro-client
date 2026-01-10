@@ -58,82 +58,219 @@ const Login = () => {
       .finally(() => setLoading(false));
   };
 
-  return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
-      style={{ backgroundImage: `url(${bgImage})` }}
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleDemoLoginUser = ()=>{
+
+    setEmail("rabeya@khatun.com")
+    setPassword("Amirabeya")
+
+  }
+  const handleDemoLoginAdmin = ()=>{
+
+    setEmail("admin@1.com")
+    setPassword("Amiadmin")
+
+  }
+
+return (
+  <div
+    className="py-20 min-h-screen flex items-center justify-center bg-cover bg-center relative"
+    style={{ backgroundImage: `url(${bgImage})` }}
+  >
+    <title>MOVIEMASTERpro | Login</title>
+    {loading && <FullScreenLoader />}
+
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="
+        relative w-[380px] rounded-2xl
+      
+        backdrop-blur-xl
+        p-6
+        text-secondary
+        shadow-2xl
+      "
     >
-      <title>MOVIEMASTERpro | Login</title>
-      {loading && <FullScreenLoader />}
+      {/* Header */}
+      <div className="relative text-center mb-6">
+        <h1 className="text-3xl font-semibold text-highlight">
+          Movie Master Pro
+        </h1>
+        <span className="
+          absolute right-6 top-0 text-[10px]
+          bg-primary text-black
+          px-2 py-0.5 rounded-2xl
+        ">
+          BETA
+        </span>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative w-[380px] rounded-[24px] bg-black/85 backdrop-blur-xl p-6 text-white shadow-2xl"
-      >
-        <div className="relative text-center mb-6">
-          <h1 className="text-3xl font-semibold">Movie Master Pro</h1>
-          <span className="absolute right-6 top-0 text-[10px] bg-emerald-300 text-black px-2 py-0.5 rounded-full">
-            BETA
-          </span>
-        </div>
+      {/* Form */}
+      <form onSubmit={handleSignInUser} className="space-y-4">
+        <input
+          name="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email address"
+          className="
+            w-full h-[44px] rounded-2xl
+     
+            px-4 text-sm
+            text-main
+            placeholder:text-secondary
+            outline-none
+            focus:ring-2 focus:ring-primary
+          "
+          required
+        />
 
-        <form onSubmit={handleSignInUser} className="space-y-4">
-          <input
-            name="email"
-            type="email"
-            placeholder="Email address"
-            className="w-full h-[44px] rounded-full bg-gray-800 px-4 text-sm outline-none focus:ring-2 focus:ring-emerald-300"
-            required
-          />
+        <input
+          name="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="
+            w-full h-[44px] rounded-2xl
+          
+            px-4 text-sm
+            text-main
+            placeholder:text-secondary
+            outline-none
+            focus:ring-2 focus:ring-primary
+          "
+          required
+        />
 
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            className="w-full h-[44px] rounded-full bg-gray-800 px-4 text-sm outline-none focus:ring-2 focus:ring-emerald-300"
-            required
-          />
+        {error && (
+          <p className="text-red-400 text-xs text-center">
+            {error}
+          </p>
+        )}
 
-          {error && (
-            <p className="text-red-400 text-xs text-center">{error}</p>
-          )}
+<motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  disabled={loading}
+  className="
+    w-full h-[44px] rounded-2xl
+    bg-primary text-black
+    font-semibold
+    hover:bg-primary-100
+    disabled:opacity-50
+    transition-colors duration-300
+  "
+>
+  {loading ? "Logging in..." : "Login"}
+</motion.button>
 
-          <button
-            disabled={loading}
-            className="w-full h-[44px] rounded-full bg-emerald-300 text-black font-semibold disabled:opacity-50"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
 
-        <Link to="/register">
-          <button className="mt-3 w-full h-[44px] rounded-full border border-emerald-300 text-emerald-300 hover:bg-emerald-300 hover:text-black transition">
-            Sign Up
-          </button>
-        </Link>
+      </form>
 
-        <div className="flex items-center gap-3 my-4 text-gray-400 text-sm">
-          <div className="flex-1 h-px bg-gray-600" />
-          or
-          <div className="flex-1 h-px bg-gray-600" />
-        </div>
+      {/* Sign up */}
+<Link to="/register">
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="
+      mt-3 w-full h-[44px] rounded-2xl
+      border border-primary
+      text-highlight
+      bg-secondary
+      hover:bg-primary-100
+      hover:text-black
+      transition-colors duration-300
+    "
+  >
+    Sign Up
+  </motion.button>
+</Link>
 
-        <button
-          onClick={handleGoogleSignIn}
-          disabled={loading}
-          className="w-full h-[44px] rounded-full border border-gray-600 flex items-center justify-center gap-2 hover:bg-gray-800 transition disabled:opacity-50"
-        >
-          <img
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            className="w-4 h-4"
-          />
-          <span className="text-sm">Sign in with Google</span>
-        </button>
-      </motion.div>
-    </div>
-  );
+
+
+      {/* Demo Login */}
+<motion.button
+  type="button"
+  onClick={handleDemoLoginUser}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="
+    w-full h-[44px] rounded-2xl mt-2
+    bg-dark
+    text-secondary
+    border border-primary/30
+    hover:bg-primary-100
+    hover:text-black
+    hover:border-primary
+    transition-all duration-300
+  "
+>
+  Demo Login User
+</motion.button>
+      {/* Demo Login */}
+<motion.button
+  type="button"
+  onClick={handleDemoLoginAdmin}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="
+    w-full h-[44px] rounded-2xl mt-2
+    bg-dark
+    text-secondary
+    border border-primary/30
+    hover:bg-primary-100
+    hover:text-black
+    hover:border-primary
+    transition-all duration-300
+  "
+>
+  Demo Login Admin
+</motion.button>
+
+
+
+
+      {/* Divider */}
+      <div className="flex items-center gap-3 my-4 text-secondary text-sm">
+        <div className="flex-1 h-px bg-dark" />
+        or
+        <div className="flex-1 h-px bg-dark" />
+      </div>
+
+      {/* Google */}
+<motion.button
+  onClick={handleGoogleSignIn}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  disabled={loading}
+  className="
+    w-full h-[44px] rounded-2xl
+    bg-dark
+    flex items-center justify-center gap-2
+    hover:bg-primary-100
+    hover:text-black
+    transition-colors duration-300
+    disabled:opacity-50
+  "
+>
+  <img
+    src="https://www.svgrepo.com/show/475656/google-color.svg"
+    className="w-4 h-4"
+  />
+  <span className="text-sm">Sign in with Google</span>
+</motion.button>
+
+
+    </motion.div>
+  </div>
+);
+
 };
 
 export default Login;

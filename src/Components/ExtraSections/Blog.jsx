@@ -41,7 +41,7 @@ const Blog = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-base-100 py-12 px-4 md:px-12 lg:px-24 pt-24">
+        <div className="min-h-screen bg-secondary px-4 md:px-12 lg:px-24 mt-20 md:mt-28">
             <title>MOVIEMASTERpro | </title>
             <div className="max-w-7xl mx-auto">
                 
@@ -62,7 +62,7 @@ const Blog = () => {
                     {blogs.map((blog) => (
                         <div 
                             key={blog.id} 
-                            className="group card bg-base-200 border border-base-300 hover:shadow-2xl transition-all duration-500 rounded-[2.5rem] overflow-hidden"
+                            className="group card bg-secondary border border-base-300 hover:shadow-2xl transition-all duration-500 rounded-2xl overflow-hidden"
                         >
                             <figure className="relative h-64 overflow-hidden">
                                 <img 
@@ -102,8 +102,8 @@ const Blog = () => {
                 </div>
 
                 {/* --- Newsletter --- */}
-                <div className="mt-24 p-12 rounded-[3rem] bg-neutral text-neutral-content relative overflow-hidden text-center md:text-left">
-                    <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+                <div className="mt-24 p-12 rounded-2xl bg-secondary text-neutral-content relative overflow-hidden text-center md:text-left">
+                    <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-2xl blur-3xl"></div>
                     <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
                         <div className="max-w-md">
                             <h2 className="text-4xl font-black mb-4 italic">Join the Cinephile Club</h2>
@@ -119,17 +119,17 @@ const Blog = () => {
                 {/* --- Read More Modal --- */}
                 {selectedBlog && (
                     <div className="modal modal-open modal-bottom sm:modal-middle backdrop-blur-md">
-                        <div className="modal-box max-w-3xl bg-base-100 rounded-[2.5rem] p-0 overflow-hidden shadow-2xl border border-base-300">
+                        <div className="modal-box max-w-3xl bg-secondary rounded-2xl p-0 overflow-hidden shadow-2xl border border-base-300">
                             <button 
                                 onClick={() => setSelectedBlog(null)}
-                                className="btn btn-circle btn-ghost absolute right-4 top-4 z-20 bg-base-100/50 backdrop-blur-md"
+                                className="btn btn-circle btn-ghost absolute right-4 top-4 z-20 bg-secondary backdrop-blur-md"
                             >
                                 <HiXMark className="text-2xl" />
                             </button>
 
                             <div className="relative h-72">
                                 <img src={selectedBlog.image} className="w-full h-full object-cover" alt="" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent"></div>
+                                <div className="absolute inset-0 bg-secondary"></div>
                                 <div className="absolute bottom-6 left-8">
                                     <span className="badge badge-secondary mb-2">{selectedBlog.category}</span>
                                     <h2 className="text-3xl md:text-4xl font-black text-white">{selectedBlog.title}</h2>

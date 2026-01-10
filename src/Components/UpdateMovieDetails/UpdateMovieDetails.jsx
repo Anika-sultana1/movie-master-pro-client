@@ -187,7 +187,7 @@ const UpdateMovieDetails = () => {
         <input
           value={formData.addedBy}
           readOnly
-          className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
+          className="input input-bordered w-full bg-secondary cursor-not-allowed"
         />
 
         <button

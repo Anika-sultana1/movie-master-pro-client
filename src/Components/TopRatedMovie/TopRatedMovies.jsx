@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import useAxios from '../../Hooks/useAxios';
 import { Link } from 'react-router';
-import { FaStar } from 'react-icons/fa';
+import { motion } from "framer-motion";
 
 const TopRatedMovies = () => {
   const axios = useAxios();
@@ -19,11 +19,11 @@ const TopRatedMovies = () => {
   }, [axios]);
 
   return (
-    <div className="p-6  bg-gray-100">
+    <div className="p-6 mt-20 md:mt-28  bg-secondary">
       <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-700">
-        <span className="inline-block mt-10 bg-gradient-to-r from-teal-400 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg">
+    
           Top Rated Movies
-        </span>
+     
       </h2>
 
       <Swiper
@@ -45,33 +45,34 @@ const TopRatedMovies = () => {
       >
         {movies.map(movie => (
           <SwiperSlide key={movie._id}>
-            <div className="bg-white h-[400px] rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl cursor-pointer">
-              <div className="relative h-[220px]">
-                <img 
-                  src={movie.posterUrl} 
-                  alt={movie.title} 
-                  className="object-cover h-full w-full rounded-t-2xl transition-transform duration-500 hover:scale-110" 
-                />
-                <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white font-semibold text-lg">
-                  {movie.title}
-                </div>
-              </div>
+          <motion.div
+                  key={movie._id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="relative group rounded-2xl overflow-hidden shadow-lg cursor-pointer"
+                >
+                  <img
+                    src={movie.posterUrl}
+                    alt={movie.title}
+                    className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>
+                  <div className="absolute bottom-0 left-0 p-4 text-white w-full">
+                    <h3 className="text-xl font-bold mb-1">{movie.title}</h3>
+                    <div className="flex items-center gap-3 text-sm text-gray-300">
 
-              <div className="p-4">
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold text-gray-800">{movie.title}</h3>
-                  <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-sm font-semibold px-3 py-1 rounded-full shadow">
-                    <FaStar></FaStar> {movie.rating || "N/A"}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 line-clamp-3 mb-4">{movie.plotSummary}</p>
-                <Link to={`/movies/${movie._id}`}>
-                  <button className="w-full py-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg shadow transition-all">
-                    View Movie Details
-                  </button>
-                </Link>
-              </div>
-            </div>
+                   
+                      <span className="flex items-center gap-1">
+                      {movie.plotSummary || "----"}
+                      </span>
+                       
+                    </div>
+                <div className="card-actions justify-end">
+      <button className="btn-primary w-full"><Link to={`/movies/${movie._id}`}>View movie details</Link></button>
+    </div>
+                  </div>
+                </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>

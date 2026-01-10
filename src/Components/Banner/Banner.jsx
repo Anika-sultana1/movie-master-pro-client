@@ -17,17 +17,15 @@ const Banner = () => {
     <animated.div 
       style={bgSpring}
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-   
-      style={{ 
-        ...bgSpring, 
+   style={{  ...bgSpring, 
         backgroundImage: `url(${bannerImg})`,
       }}
     >
-      <div className="absolute inset-0 bg-black/40"></div>
+   
       
       <div className="relative z-10 text-center px-4">
         <motion.h1
-          className="text-6xl md:text-7xl font-bold text-white"
+          className="text-6xl md:text-7xl text-highlight-100 text-highlight-hover font-bold "
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -45,7 +43,7 @@ const Banner = () => {
         </motion.p>
 
         <motion.button
-          className="btn btn-primary text-white mt-4"
+          className=" bg-primary mt-4"
           whileHover={{ scale: 1.1, rotate: 3 }}
           whileTap={{ scale: 0.9 }}
           initial={{ scale: 0 }}

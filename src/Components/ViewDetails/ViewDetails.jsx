@@ -88,7 +88,7 @@ const handleDelete = (movieId) => {
 <div>
     <ToastContainer></ToastContainer>
     <title>MOVIEMASTERpro |Details</title>
-            <div className="relative  min-h-screen rounded-xl overflow-hidden shadow-lg">
+            <div className="relative  min-h-screen rounded-2xl overflow-hidden shadow-lg">
 
   <img
     src={bgImage}
@@ -97,10 +97,10 @@ const handleDelete = (movieId) => {
   />
 
 
-  <div className="absolute inset-0 bg-black/40"></div>
+  <div className="absolute inset-0 "></div>
 
   <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-    <h2 className="text-white text-4xl font-bold mb-2">
+    <h2 className="text-highlight text-4xl font-bold mb-2">
       Movies Page
     </h2>
     <p className="text-gray-300 text-2xl mt-5 mb-10">
@@ -114,8 +114,7 @@ const handleDelete = (movieId) => {
   rel="noopener noreferrer"
    className="
     btn w-[200px] flex items-center gap-2
-    bg-gray-200 text-black
-    hover:bg-[#e50916] hover:text-black
+    bg-primary 
     transition-all duration-300
   "
 >
@@ -129,10 +128,10 @@ const handleDelete = (movieId) => {
 
 
 
-            <div className=" mx-auto bg-white rounded-2xl  overflow-hidden flex flex-col lg:flex-row transform hover:shadow-3xl transition duration-300">
+            <div className=" mx-auto bg-secondary rounded-2xl  overflow-hidden flex flex-col lg:flex-row transform hover:shadow-3xl transition duration-300">
 
 
-                <div className="lg:w-1/3 bg-gray-100 flex-shrink-0">
+                <div className="lg:w-1/3 bg-secondary flex-shrink-0">
                     <img
                         src={details.posterUrl}
                         alt={details.title}
@@ -149,7 +148,7 @@ const handleDelete = (movieId) => {
                         </h1>
                         <div className="flex items-center mt-3 gap-5">
 
-                            <div className="flex items-center text-2xl font-bold text-white bg-amber-500 px-4 py-1 rounded-full shadow-md">
+                            <div className="flex items-center text-2xl font-bold text-white bg-primary px-4 py-1 rounded-full shadow-md">
                                 <FaStar className="mr-2 text-white" />
                                 <span>{details.rating}</span>
                             </div>

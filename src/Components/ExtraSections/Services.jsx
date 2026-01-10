@@ -11,7 +11,7 @@ import {
 } from "react-icons/hi2";
 
 const Services = () => {
-    // Modal কন্ট্রোল করার জন্য State
+
     const [selectedService, setSelectedService] = useState(null);
 
     const serviceList = [
@@ -66,9 +66,9 @@ const Services = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-base-100 py-16 px-4 md:px-12 lg:px-24 pt-20">
+        <div className="min-h-screen bg-secondary px-4 mt-20 md:mt-28 md:px-12 lg:px-24">
             <div className="max-w-7xl mx-auto">
-                {/* Section Header */}
+        
                 <div className="text-center mb-20">
                     <span className="text-primary font-bold tracking-widest uppercase text-sm">Features</span>
                     <h1 className="text-5xl md:text-6xl font-black mt-4 mb-6 italic">Our Core Services</h1>
@@ -76,8 +76,8 @@ const Services = () => {
                         Explore the powerful features designed to make your movie tracking experience seamless and fun.
                     </p>
                     <div className="flex justify-center gap-2 mt-8">
-                        <div className="h-1.5 w-16 rounded-full bg-primary"></div>
-                        <div className="h-1.5 w-4 rounded-full bg-secondary"></div>
+                        <div className="h-1.5 w-16 rounded-2xl bg-primary"></div>
+                        <div className="h-1.5 w-4 rounded-2xl bg-secondary"></div>
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@ const Services = () => {
                     {serviceList.map((service, index) => (
                         <div 
                             key={index} 
-                            className="group card bg-base-200 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-base-300 overflow-hidden"
+                            className="group card bg-dark shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-base-300 overflow-hidden"
                         >
                             <div className="card-body">
                                 <div className="mb-4">{service.icon}</div>
@@ -108,7 +108,7 @@ const Services = () => {
                                 <div className="mt-6">
                                     <button 
                                         onClick={() => setSelectedService(service)}
-                                        className="btn btn-sm btn-ghost group-hover:btn-primary group-hover:text-white transition-all p-0 group-hover:px-4 rounded-full"
+                                        className="btn btn-sm btn-ghost group-hover:btn-primary group-hover:text-white transition-all p-0 group-hover:px-4 rounded-2xl"
                                     >
                                         Learn More 
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,7 +124,7 @@ const Services = () => {
                 {/* --- Quick View Modal --- */}
                 {selectedService && (
                     <div className="modal modal-open modal-bottom sm:modal-middle backdrop-blur-md">
-                        <div className="modal-box bg-base-100 border border-primary/20 rounded-[2.5rem] p-8 max-w-2xl relative shadow-2xl">
+                        <div className="modal-box bg-secondary border border-primary/20 rounded-2xl p-8 max-w-2xl relative shadow-2xl">
                             <button 
                                 onClick={() => setSelectedService(null)}
                                 className="btn btn-sm btn-circle btn-ghost absolute right-6 top-6"
@@ -133,7 +133,7 @@ const Services = () => {
                             </button>
 
                             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                                <div className="p-6 bg-primary/10 rounded-[2rem] text-primary shadow-inner">
+                                <div className="p-6 bg-primary/10 rounded-2xl text-primary shadow-inner">
                                     {selectedService.icon}
                                 </div>
                                 <div className="flex-1 text-center md:text-left">
@@ -153,7 +153,7 @@ const Services = () => {
                             <div className="modal-action justify-center mt-12">
                                 <button 
                                     onClick={() => setSelectedService(null)} 
-                                    className="btn btn-primary btn-wide rounded-full shadow-lg shadow-primary/20"
+                                    className="btn btn-primary btn-wide rounded-2xl shadow-lg shadow-primary/20"
                                 >
                                     Understood
                                 </button>
@@ -164,14 +164,14 @@ const Services = () => {
                 )}
 
                 {/* Bottom CTA */}
-                <div className="mt-24 p-12 rounded-[3.5rem] bg-neutral text-neutral-content text-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-full -ml-32 -mb-32 blur-3xl"></div>
+                <div className="mt-24 p-12 rounded-2xl bg-neutral text-neutral-content text-center relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-2xl -mr-32 -mt-32 blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-2xl -ml-32 -mb-32 blur-3xl"></div>
                     
                     <h2 className="text-3xl md:text-5xl font-black mb-6 italic">Ready to build your collection?</h2>
                     <p className="mb-10 opacity-80 max-w-xl mx-auto text-lg">Join our community today and start tracking your favorite movies with ease.</p>
                     <Link to='/movies/add'>
-                        <button className="btn btn-primary btn-lg rounded-full px-12 hover:scale-105 transition-transform">
+                        <button className="btn btn-primary btn-lg rounded-2xl px-12 hover:scale-105 transition-transform">
                             Start Tracking Now
                         </button>
                     </Link>

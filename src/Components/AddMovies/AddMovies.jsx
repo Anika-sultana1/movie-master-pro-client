@@ -53,12 +53,12 @@ setLoading(false)
 
 
     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-24 py-10"
+        <div className="min-h-screen bg-secondary flex justify-center items-start pt-24 py-10"
           style={{ backgroundImage: `url(${bgImage})` }}
           >
             <title>MovieMASTERpro | Add Movies</title>
         
-            <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-3xl">
+            <div className="bg-secondary p-8 rounded-2xl shadow-xl w-full max-w-3xl">
                 <h1 className="text-3xl text-gray-600 font-bold mb-6">Add New Movie</h1>
 
                 {error && <p className="text-red-500 mb-4">{error}</p>}

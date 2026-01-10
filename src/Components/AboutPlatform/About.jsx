@@ -14,7 +14,7 @@ const about = [
 
 
   return (
-    <section className="py-20 bg-gray-100 text-gray-800">
+    <section className=" bg-secondary text-secondary mt-20 md:mt-28">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <motion.h2 
           initial={{ opacity: 0, y: 30 }}
@@ -22,7 +22,7 @@ const about = [
           transition={{ duration: 0.6 }}
           className="text-4xl font-bold mb-6 text-gray-900"
         >
-          About <span className="text-teal-600">MovieMaster Pro</span>
+          About <span className="text-highlight">MovieMaster Pro</span>
         </motion.h2>
 
         <motion.p 
@@ -43,9 +43,9 @@ const about = [
               key={index}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 150 }}
-              className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg"
+              className="p-6 bg-secondary rounded-2xl shadow-md hover:shadow-lg"
             >
-              <div className="text-4xl text-teal-600 mb-3 flex justify-center">
+              <div className="text-4xl text-highlight mb-3 flex justify-center">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>

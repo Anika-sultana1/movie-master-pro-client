@@ -82,7 +82,7 @@ const handleDelete = (movieId) => {
           Please add your movies to see them here.
         </p>
      
-          <button className='bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition'>
+          <button className='bg-primary text-secondary px-6 py-2 rounded-lg hover:bg-primary-700 transition'>
            <Link to='/movies/add'> Add Movie</Link>
           </button>
 
@@ -106,7 +106,7 @@ const handleDelete = (movieId) => {
               />
 
       
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>
 
               <div className="absolute bottom-0 left-0 p-4 text-white w-full">
                 <h3 className="text-5xl font-bold mb-5">{mycollection.title}</h3>
@@ -139,14 +139,14 @@ const handleDelete = (movieId) => {
                 </p>
 
        <div className='flex gap-3'>
-                 <Link to={`/movies/update/${mycollection._id}`}><button className="mt-3 w-[150px] py-1.5  bg-teal-600  text-white font-medium rounded-lg hover:bg-teal-700 transition">
+                 <Link to={`/movies/update/${mycollection._id}`}><button className="mt-3 w-[150px] py-1.5  bg-primary-200  text-white font-medium rounded-2xl hover:bg-teal-700 transition">
                   Edit Details
                 </button></Link>
-                <button onClick={()=>handleDelete(mycollection._id)} className="mt-3 w-[150px] py-1.5 opacity-0 group-hover:opacity-100 bg-red-500 text-white font-medium rounded-lg hover:bg-teal-700 transition">
+                <button onClick={()=>handleDelete(mycollection._id)} className="mt-3 w-[150px] py-1.5 opacity-0 group-hover:opacity-100 bg-primary-500 text-white font-medium rounded-2xl hover:bg-primary-100 transition">
                   Delete 
                 </button>
        </div>
-                <Link to={`/movies/${mycollection._id}`}><button className="mt-3 w-[300px] py-1.5 opacity-0 group-hover:opacity-100 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700 transition">
+                <Link to={`/movies/${mycollection._id}`}><button className="mt-3 w-[300px] py-1.5 opacity-0 group-hover:opacity-100 bg-primary-600 text-white font-medium rounded-2xl hover:bg-teal-700 transition">
                   View Details
                 </button></Link>
               </div>

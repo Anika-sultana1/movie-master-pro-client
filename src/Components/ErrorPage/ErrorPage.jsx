@@ -11,7 +11,7 @@ const ErrorPage = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-300 px-4">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-secondary px-4">
       
       {/* Animated Image */}
       <motion.img
@@ -46,7 +46,7 @@ const ErrorPage = () => {
       {/* Go Back Button */}
       <motion.button
         onClick={handleGoBack}
-        className="px-6 py-3 bg-gradient-to-r from-teal-400 to-blue-500 text-white rounded-lg font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300"
+        className="px-6 py-3 bg-primary text-white rounded-2xl font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -55,9 +55,9 @@ const ErrorPage = () => {
 
       {/* Optional: small decorative dots or shapes */}
       <div className="absolute bottom-10 flex gap-2">
-        <span className="w-2 h-2 bg-teal-400 rounded-full animate-ping"></span>
-        <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping delay-200"></span>
-        <span className="w-2 h-2 bg-purple-500 rounded-full animate-ping delay-400"></span>
+        <span className="w-2 h-2 bg-teal-400 rounded-2xl animate-ping"></span>
+        <span className="w-2 h-2 bg-blue-500 rounded-2xl animate-ping delay-200"></span>
+        <span className="w-2 h-2 bg-purple-500 rounded-2xl animate-ping delay-400"></span>
       </div>
 
     </div>

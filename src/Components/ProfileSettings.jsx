@@ -71,7 +71,7 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-secondary  py-12 px-4 sm:px-6 lg:px-8">
       <title>MOVIEMASTERpro | Profile Settings</title>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -82,15 +82,15 @@ const ProfileSettings = () => {
 
         {/* Header Section */}
         <div className="mb-10 text-left border-b border-gray-200 dark:border-slate-800 pb-6">
-          <h1 className="text-3xl font-bold text-slate-800 dark:text-white">Account Settings</h1>
+          <h1 className="text-3xl font-bold text-secondary dark:text-white">Account Settings</h1>
           <p className="text-slate-500 mt-1">Update your profile and how others see you.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Panel: Profile Overview */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm text-center overflow-hidden relative">
-              <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-primary/20 to-secondary/20"></div>
+            <div className="bg-secondary  border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-sm text-center overflow-hidden relative">
+              <div className="absolute top-0 left-0 w-full h-24 bg-linear-to-r from-primary/20 to-secondary/20"></div>
               
               <div className="relative mt-4">
                 <div className="relative inline-block">
@@ -101,7 +101,7 @@ const ProfileSettings = () => {
                   />
                   <button
                     onClick={() => openEdit("photoURL")}
-                    className="absolute -bottom-2 -right-2 bg-primary text-white p-2.5 rounded-xl shadow-lg hover:scale-110 transition-transform active:scale-95"
+                    className="absolute -bottom-2 -right-2 bg-primary text-white p-2.5 rounded-2xl shadow-lg hover:scale-110 transition-transform active:scale-95"
                   >
                     <FaCamera size={16} />
                   </button>
@@ -123,7 +123,7 @@ const ProfileSettings = () => {
                   <FaQuoteLeft size={12} />
                   <span>Bio</span>
                 </div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed italic">
+                <p className="text-slate-600  text-sm leading-relaxed italic">
                   {user?.bio || "No bio added yet. Tell us something about yourself!"}
                 </p>
                 <button
@@ -138,7 +138,7 @@ const ProfileSettings = () => {
 
           {/* Right Panel: Detailed Info */}
           <div className="lg:col-span-8 space-y-4">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-2 shadow-sm">
+            <div className="bg-secondary  border border-slate-200 dark:border-slate-800 rounded-2xl p-2 shadow-sm">
               {[
                 { label: "Full Name", value: user?.displayName, field: "name", icon: <FaUser className="text-blue-500" /> },
                 { label: "Phone Number", value: user?.phoneNumber, field: "phoneNumber", icon: <FaPhoneAlt className="text-green-500" /> },
@@ -146,18 +146,18 @@ const ProfileSettings = () => {
                 <div
                   key={field}
                   onClick={() => openEdit(field)}
-                  className="group flex justify-between items-center p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-2xl transition-all cursor-pointer"
+                  className="group flex justify-between items-center p-6 hover:bg-primary/15 rounded-2xl transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-5">
-                    <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl group-hover:bg-white dark:group-hover:bg-slate-700 transition-colors shadow-sm">
+                    <div className="p-3 bg-secondary rounded-2xl group-hover:bg-secondary  transition-colors shadow-sm">
                       {icon}
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-0.5">{label}</p>
-                      <p className="font-medium text-slate-700 dark:text-slate-200">{value || "Click to add"}</p>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-highlight-100 mb-0.5">{label}</p>
+                      <p className="font-medium text--highlight ">{value || "Click to add"}</p>
                     </div>
                   </div>
-                  <CiEdit size={24} className="text-slate-300 group-hover:text-primary transition-colors" />
+                  <CiEdit size={24} className="text-highlight-100 group-hover:text-primary transition-colors" />
                 </div>
               ))}
             </div>
@@ -167,12 +167,12 @@ const ProfileSettings = () => {
         {/* Improved Modal */}
         <AnimatePresence>
           {openField && (
-            <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center z-50 p-4">
+            <div className="fixed inset-0 bg-primary-100 backdrop-blur-[2px] flex items-center justify-center z-50 p-4">
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] w-full max-w-md shadow-2xl"
+                className="bg-secondary  p-8 rounded-2xl w-full max-w-md shadow-2xl"
               >
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                    Update <span className="text-primary capitalize">{openField === 'name' ? 'Full Name' : openField}</span>
@@ -185,7 +185,7 @@ const ProfileSettings = () => {
                       value={formData.bio}
                       onChange={handleChange}
                       rows={5}
-                      className="textarea textarea-bordered w-full focus:ring-2 ring-primary/20 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none text-base"
+                      className="textarea textarea-bordered w-full focus:ring-2 ring-primary/20 border-slate-200  focus:outline-none text-base"
                       placeholder="Share a bit about yourself..."
                     />
                   ) : (
@@ -194,7 +194,7 @@ const ProfileSettings = () => {
                       value={formData[openField]}
                       onChange={handleChange}
                       autoFocus
-                      className="input input-bordered w-full focus:ring-2 ring-primary/20 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none text-base"
+                      className="input input-bordered w-full focus:ring-2 ring-primary/20 border-slate-200  bg-secondary  focus:outline-none text-base"
                       placeholder={`Enter your ${openField}`}
                     />
                   )}

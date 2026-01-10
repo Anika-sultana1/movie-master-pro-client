@@ -32,7 +32,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 bg-base-100 overflow-hidden pt-20">
+    <section className="mt-20 md:mt-28 bg-secondary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
         
@@ -40,7 +40,7 @@ const Testimonials = () => {
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-teal-500 font-bold tracking-[0.3em] uppercase text-xs"
+            className="text-highlight font-bold tracking-[0.3em] uppercase text-xs"
           >
             User Feedback
           </motion.span>
@@ -50,7 +50,7 @@ const Testimonials = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-black italic mt-3 dark:text-white"
           >
-            What Our <span className="text-teal-500">Cinephiles</span> Say
+            What Our <span className="text-highlight">Cinephiles</span> Say
           </motion.h2>
         </div>
 
@@ -64,10 +64,10 @@ const Testimonials = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
               whileHover={{ y: -10 }}
-              className="relative bg-base-200 dark:bg-gray-800 p-8 rounded-[2.5rem] border border-base-300 dark:border-gray-700 shadow-xl group"
+              className="relative bg-dark dark:bg-gray-800 p-8 rounded-2xl border border-base-300 dark:border-gray-700 shadow-xl group"
             >
      
-              <div className="absolute top-6 right-8 text-teal-500/10 text-6xl group-hover:text-teal-500/20 transition-colors">
+              <div className="absolute top-6 right-8 text-highlight-100 text-6xl group-hover:text-highlight transition-colors">
                 <FaQuoteLeft />
               </div>
 
@@ -76,7 +76,7 @@ const Testimonials = () => {
                 {[...Array(5)].map((_, i) => (
                   <HiStar 
                     key={i} 
-                    className={`text-lg ${i < item.rating ? "text-amber-400" : "text-gray-300"}`} 
+                    className={`text-lg ${i < item.rating ? "text-highlight" : "text-highlight-100"}`} 
                   />
                 ))}
               </div>
@@ -93,7 +93,7 @@ const Testimonials = () => {
                 </div>
                 <div>
                   <h4 className="font-black text-gray-900 dark:text-white">{item.name}</h4>
-                  <p className="text-xs font-bold text-teal-500 uppercase tracking-widest">{item.role}</p>
+                  <p className="text-xs font-bold text-highlight uppercase tracking-widest">{item.role}</p>
                 </div>
               </div>
             </motion.div>

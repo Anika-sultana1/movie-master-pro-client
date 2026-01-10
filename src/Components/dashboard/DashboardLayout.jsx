@@ -1,84 +1,131 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router';
+import { NavLink, Outlet, useNavigate } from 'react-router';
 import Logo from '../logo/Logo';
 import { CiSettings } from "react-icons/ci";
-import { MdManageHistory } from 'react-icons/md';
-import useRole from '../../Hooks/useRole';
+import { MdManageHistory, MdLogout } from 'react-icons/md';
 import { BsCollectionPlay } from 'react-icons/bs';
-
+import { HiHome, HiMenuAlt2 } from 'react-icons/hi';
+import useRole from '../../Hooks/useRole';
+import { toast } from 'react-toastify';
+import useAuth from '../../Hooks/useAuth';
 
 const DashboardLayout = () => {
+  const { role } = useRole();
 
-const {role} = useRole();
+  const {logOutUser} = useAuth();
+  const navigate = useNavigate();
+
+const navLinkStyles = ({ isActive }) =>
+  `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+    isActive
+      ? 'bg-primary text-white shadow-md pointer-events-none'
+      : 'text-secondary hover:bg-secondary hover:text-white'
+  }`;
+
+
+
+  const handleLogOut = () => {
+    logOutUser()
+      .then(() => {
+        toast.success('Log Out Success!');
+        navigate('/login');
+      })
+      .catch(() => toast.error('Log Out Failed'));
+  };
 
   return (
-    <div className="drawer lg:drawer-open">
-      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+    <div className="drawer lg:drawer-open bg-base-200 min-h-screen font-sans">
+      <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+
+   
+      <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <nav className="navbar w-full bg-base-300">
-          <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
-            {/* Sidebar toggle icon */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
-          </label>
-          <div className="px-4"><Logo></Logo></div>
+        <nav className="navbar bg-base-100 border-b border-base-300 px-4 sticky top-0 z-10">
+          <div className="flex-1 gap-2">
+            <label
+              htmlFor="dashboard-drawer"
+              className="btn btn-ghost btn-circle lg:hidden"
+            >
+              <HiMenuAlt2 size={24} />
+            </label>
+            <div className="lg:hidden">
+                <Logo />
+            </div>
+          </div>
+          
+     
         </nav>
-        {/* Page content here */}
-        <Outlet></Outlet>
+
+        {/* Page content */}
+        <main className="p-6 md:p-8 flex-grow">
+          <div className="bg-base-100 rounded-2xl shadow-sm min-h-[calc(100vh-140px)] p-6">
+            <Outlet />
+          </div>
+        </main>
       </div>
 
-      <div className="drawer-side is-drawer-close:overflow-visible">
-        <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-        <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-          {/* Sidebar content here */}
-          <ul className="menu w-full grow">
-            {/* List item */}
-            <li>
-           <Link to='/dashboard'>
-              <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                {/* Home icon */}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                <span className="is-drawer-close:hidden">Homepage</span>
-              </button></Link>
-            </li>
-            <li>
-              <Link to='/dashboard/my-movies'>
-              <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Movies">
-                {/* My Movies icon */}
-               <BsCollectionPlay size={20} />
-                <span className="is-drawer-close:hidden">My Movies</span>
-              </button>
-              </Link>
-              </li>
-
-            {/* List item */}
-            {
-              role === 'admin' && (
-                          <li>
-              <Link to='/dashboard/movie-management'>
-              <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Movie Management">
-                {/* Settings icon */}
-              <MdManageHistory size={20}/>
-                <span className="is-drawer-close:hidden">Movie Management</span>
-              </button>
-              </Link>
-              
-            </li>
-              )
-            }
   
+      <div className="drawer-side z-20">
+        <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+
+        <aside className="w-72 bg-base-100 border-r border-base-300 min-h-full flex flex-col">
+          {/* Sidebar Logo Section */}
+          <div className="p-6 hidden lg:block border-b border-base-200">
+            <Logo />
+          </div>
+
+          <ul className="menu p-4 gap-2 flex-grow">
+            <p className="text-xs font-bold text-gray-400 uppercase px-4 mb-2">Main Menu</p>
+            
+            {/* Dashboard Home */}
             <li>
-              <Link to='/dashboard/profile-settings'>
-              <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
-                {/* Settings icon */}
-                <CiSettings size={20} />
-                <span className="is-drawer-close:hidden">Profile Settings</span>
-              </button>
-              </Link>
-              
+              <NavLink to="/dashboard" end className={navLinkStyles}>
+                <HiHome size={22} />
+                <span className="font-medium">Dashboard</span>
+              </NavLink>
             </li>
+
+            {/* My Movies */}
+            <li>
+              <NavLink to="/dashboard/my-movies" className={navLinkStyles}>
+                <BsCollectionPlay size={20} />
+                <span className="font-medium">My Movies</span>
+              </NavLink>
+            </li>
+
+            {/* Admin Section */}
+            {role === 'admin' && (
+              <>
+                <div className="divider px-4 opacity-50"></div>
+                <p className="text-xs font-bold text-gray-400 uppercase px-4 mb-2">Admin Tools</p>
+                <li>
+                  <NavLink to="/dashboard/movie-management" className={navLinkStyles}>
+                    <MdManageHistory size={22} />
+                    <span className="font-medium">Movie Management</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
-        </div>
+
+          {/* Bottom Menu */}
+          <div className="p-4 border-t border-base-200">
+             <ul className="menu p-0 gap-2">
+                <li>
+                  <NavLink to="/dashboard/profile-settings" className={navLinkStyles}>
+                    <CiSettings size={22} className="font-bold" />
+                    <span className="font-medium">Settings</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogOut} className="flex items-center gap-3 px-4 py-3 rounded-lg text-error hover:bg-error/10 transition-all duration-300 mt-1">
+                    <MdLogout size={22} />
+                    <span className="font-medium">Logout</span>
+                  </button>
+                </li>
+             </ul>
+          </div>
+        </aside>
       </div>
     </div>
   );

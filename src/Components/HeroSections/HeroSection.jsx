@@ -6,7 +6,6 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
-import bgImage from '../../assets/colorful-abstract-background-with-paints-bubbles.jpg'
 import FullScreenLoader from "../FullScreenLoader";
 
 const HeroSection = () => {
@@ -31,8 +30,7 @@ const [loading, setLoading] = useState(true)
   return (
 
 
-    <div className="w-full py-10"
-      style={{ backgroundImage: `url(${bgImage})` }}>
+    <div className="w-full my-20 md:my-28">
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
